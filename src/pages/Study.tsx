@@ -1,0 +1,197 @@
+﻿import { useMemo, useState } from 'react';
+import { ArrowRight, Clock, Search, X, BookOpen, GraduationCap } from 'lucide-react';
+import { faculties } from '@/data/university';
+
+const levelFilters = ['All', 'Certificate', 'Diploma', 'Bachelor', 'Postgraduate Diploma', 'Masters', 'PhD'] as const;
+
+export function Study() {
+  const [levelFilter, setLevelFilter] = useState<string>('All');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const allProgrammes = useMemo(
+    () =>
+      faculties.flatMap((f) =>
+        f.programs.map((p) => ({
+          name: p.name,
+          description: p.description ?? '',
+          duration: p.duration,
+          level: p.level,
+          discipline: p.discipline ?? '',
+          facultyName: f.shortName,
+          facultyId: f.id,
+          lastAccreditation: p.lastAccreditation,
+          reviewYear: p.reviewYear,
+          campus: p.campus,
+        }))
+      ),
+    []
+  );
+
+  const filtered = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    return allProgrammes.filter((p) => {
+      if (levelFilter !== 'All' && p.level !== levelFilter) return false;
+      if (!q) return true;
+      return (
+        p.name.toLowerCase().includes(q) ||
+        p.facultyName.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q)
+      );
+    });
+  }, [allProgrammes, levelFilter, searchQuery]);
+
+  return (
+    <div className="page-content">
+      {/* HERO */}
+      <section
+        className="section-pad"
+        style={{ backgroundImage: 'linear-gradient(rgba(61,26,107,0.75), rgba(61,26,107,0.75)), url("/images/programmes-bg.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', color: '#fff', paddingTop: 80, paddingBottom: 80 }}
+      >
+        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
+          <div style={{ fontSize: 12, letterSpacing: 2, textTransform: 'uppercase', opacity: 0.85, marginBottom: 12 }}>
+            Academics
+          </div>
+          <h1 style={{ fontSize: 'clamp(32px, 5vw, 56px)', fontWeight: 700, margin: 0, lineHeight: 1.1 }}>
+            Programmes at <em style={{ fontStyle: 'italic' }}>AVIU</em>
+          </h1>
+          <p style={{ fontSize: 17, marginTop: 16, maxWidth: 720, opacity: 0.9, lineHeight: 1.7 }}>
+            Accredited Bachelor programmes across Education, Business &amp; ICT, Nursing &amp; Health Sciences, and Social Sciences.
+            Research-oriented teaching, practical placements and clear pathways.
+          </p>
+          <div style={{ display: 'flex', gap: 16, marginTop: 28, flexWrap: 'wrap' }}>
+            <div style={{ background: 'rgba(255,255,255,0.15)', padding: '10px 18px', borderRadius: 10, fontSize: 14 }}>
+              <strong style={{ fontSize: 20 }}>{allProgrammes.length}</strong> programmes
+            </div>
+            <div style={{ background: 'rgba(255,255,255,0.15)', padding: '10px 18px', borderRadius: 10, fontSize: 14 }}>
+              <strong style={{ fontSize: 20 }}>{faculties.length}</strong> faculties
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CATALOGUE */}
+      <section className="section-pad">
+        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 24px' }}>
+          <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', marginBottom: 8, color: '#3d1a6b' }}>
+            Browse our <em>full programme catalogue</em>
+          </h2>
+          <p style={{ color: '#5a4b6b', marginBottom: 28 }}>
+            {filtered.length === allProgrammes.length
+              ? `${allProgrammes.length} programmes available`
+              : `Showing ${filtered.length} of ${allProgrammes.length} programmes`}
+          </p>
+
+          {/* SEARCH */}
+          <div style={{ position: 'relative', maxWidth: 480, marginBottom: 20 }}>
+            <Search size={18} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#8a7fa0' }} />
+            <input
+              type="search"
+              placeholder="Search by programme, faculty or keyword..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              style={{ width: '100%', padding: '12px 42px', borderRadius: 10, border: '1px solid #e0d4ee', fontSize: 15, outline: 'none' }}
+            />
+            {searchQuery && (
+              <button
+                type="button"
+                onClick={() => setSearchQuery('')}
+                style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#8a7fa0' }}
+              >
+                <X size={16} />
+              </button>
+            )}
+          </div>
+
+          {/* FILTERS */}
+          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 32 }}>
+            {levelFilters.map((level) => (
+              <button
+                key={level}
+                type="button"
+                onClick={() => setLevelFilter(level)}
+                style={{
+                  padding: '8px 16px',
+                  borderRadius: 999,
+                  border: levelFilter === level ? '1px solid #3d1a6b' : '1px solid #e0d4ee',
+                  background: levelFilter === level ? '#3d1a6b' : '#fff',
+                  color: levelFilter === level ? '#fff' : '#3d1a6b',
+                  fontSize: 14,
+                  fontWeight: 500,
+                  cursor: 'pointer',
+                }}
+              >
+                {level}
+              </button>
+            ))}
+          </div>
+
+          {/* LIST */}
+          {filtered.length === 0 ? (
+            <div style={{ textAlign: 'center', padding: '60px 24px', background: '#f9f6fd', borderRadius: 12, border: '1px dashed #e0d4ee' }}>
+              <BookOpen size={40} style={{ color: '#8a7fa0', marginBottom: 12 }} />
+              <p style={{ fontSize: 16, color: '#5a4b6b' }}>No programmes match your filters.</p>
+              <button
+                type="button"
+                onClick={() => { setLevelFilter('All'); setSearchQuery(''); }}
+                style={{ marginTop: 16, padding: '10px 24px', background: '#3d1a6b', color: '#fff', border: 'none', borderRadius: 999, cursor: 'pointer', fontSize: 14 }}
+              >
+                Clear filters
+              </button>
+            </div>
+          ) : (
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 20 }}>
+              {filtered.map((p, i) => (
+                <article
+                  key={`${p.name}-${i}`}
+                  style={{
+                    border: '1px solid #e0d4ee',
+                    borderRadius: 14,
+                    padding: '24px 22px',
+                    background: '#fff',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#3d1a6b', fontSize: 12, fontWeight: 600, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
+                    <GraduationCap size={16} />
+                    <span>{p.level}</span>
+                    {p.facultyName && <span style={{ color: '#8a7fa0', fontWeight: 400, textTransform: 'none', letterSpacing: 0 }}>· {p.facultyName}</span>}
+                  </div>
+                  <h3 style={{ fontSize: 18, fontWeight: 600, color: '#3d1a6b', margin: '0 0 10px', lineHeight: 1.3 }}>
+                    {p.name}
+                  </h3>
+                  {p.description && (
+                    <p style={{ fontSize: 14, color: '#5a4b6b', lineHeight: 1.6, margin: '0 0 14px', flexGrow: 1 }}>
+                      {p.description}
+                    </p>
+                  )}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 14, fontSize: 13, color: '#3d1a6b', borderTop: '1px solid #f0e8fa', paddingTop: 14 }}>
+                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}>
+                      <Clock size={14} /> {p.duration}
+                    </span>
+                    {p.lastAccreditation && (
+                      <span style={{ color: '#8a7fa0', fontSize: 12 }}>NCHE {p.lastAccreditation}</span>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ background: '#3d1a6b', color: '#fff', padding: '64px 24px', textAlign: 'center' }}>
+        <h2 style={{ fontSize: 'clamp(24px, 3vw, 36px)', margin: 0 }}>Ready to apply?</h2>
+        <p style={{ fontSize: 16, marginTop: 12, opacity: 0.9 }}>Applications are open for January, May and August intakes.</p>
+        <a
+          href="/admissions/how-to-apply"
+          style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 24, padding: '14px 32px', background: '#fff', color: '#3d1a6b', borderRadius: 999, fontWeight: 600, textDecoration: 'none' }}
+        >
+          How to apply <ArrowRight size={16} />
+        </a>
+      </section>
+    </div>
+  );
+}
+
