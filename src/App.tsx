@@ -3,6 +3,8 @@ import { RouterProvider, useRouter } from '@/router/Router';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { ApplyProvider } from '@/components/ApplyContext';
+import { FloatingApplyButton } from '@/components/FloatingApplyButton';
+import { FloatingVideoBox } from '@/components/FloatingVideoBox';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { WelcomeSplash } from '@/components/WelcomeSplash'
 import { NewsletterStrip } from '@/components/NewsletterStrip'
@@ -333,6 +335,9 @@ function App() {
   return (
     <RouterProvider>
       <ApplyProvider>
+        <FloatingApplyButton />
+        <FloatingVideoBox />
+        
         <Routes />
       </ApplyProvider>
     </RouterProvider>
@@ -340,4 +345,9 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
 

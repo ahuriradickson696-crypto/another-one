@@ -244,7 +244,7 @@ export function Home() {
       <MomentsStrip keys={["installationGroup","installationCake","partnership","celebrating","camStage","dignitaries"]} eyebrow="Moments at AVIU" title="Graduation and launch day" />
 
       {/* CTA */}
-      <section className="cta-section">
+<section className="cta-section">
         <div className="cta-inner">
           <div className="eyebrow"><span className="eyebrow-line" /> Your next chapter starts here</div>
           <h2>Make your <em>move.</em></h2>
@@ -255,6 +255,8 @@ export function Home() {
     </div>
   );
 }
+
+
 
 
 

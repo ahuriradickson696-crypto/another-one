@@ -17,11 +17,17 @@ export function HowToApply() {
 
   return (
     <div className="page-content">
+      {/* FIXED: Added crumbs prop so SubPageHero doesn't crash */}
       <SubPageHero
         images={pageImages.admissions}
         eyebrow="Application guide"
         title={<>How to <em>Apply</em></>}
         subtitle="Follow these five simple steps to submit your application to Avance International University. The entire process can be completed online."
+        crumbs={[
+          { label: 'Home', path: '/' },
+          { label: 'Admissions', path: '/admissions' },
+          { label: 'How to Apply', path: '/admissions/how-to-apply' }
+        ]}
       />
 
       <MomentsStrip keys={['class2026', 'celebrating']} eyebrow="Your goal" title="Graduate with AVIU" />
@@ -76,11 +82,22 @@ export function HowToApply() {
             </h2>
             <p>Our admissions office is available Monday to Friday, 8:00 AM to 5:00 PM. We are happy to guide you through the application process.</p>
           </div>
+          {/* FIXED: Button is now AVIU Purple, not green, and opens the form */}
           <button
             type="button"
-            className="button button-ppply"
             onClick={openApply}
-            style={{ backgroundColor: '#3d1a6b', color: '#fff', border: 'none', padding: '14px 28px', borderRadius: '999px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}
+            style={{
+              backgroundColor: '#3d1a6b',
+              color: '#fff',
+              border: 'none',
+              padding: '14px 28px',
+              borderRadius: '999px',
+              fontWeight: 600,
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              cursor: 'pointer'
+            }}
           >
             Apply now <ArrowRight size={17} />
           </button>

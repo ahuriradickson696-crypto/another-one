@@ -1,4 +1,4 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -2309,7 +2309,7 @@ body, button, input, select, textarea, .btn, .nav, .footer, .page-content {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
-/* Strict global Sans-Serif (Inter) — institutional UI */
+/* Strict global Sans-Serif (Inter) â€” institutional UI */
 *, *::before, *::after {
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
 }
@@ -2645,7 +2645,7 @@ p, li, .hero-text { font-size: 1rem; }
   padding: 14px 20px;
   border: none;
   border-radius: 999px;
-  background: linear-gradient(135deg, #22c55e 0%, #16a34a 50%, #15803d 100%);
+  background: linear-gradient(135deg, #3d1a6b 0%, #3d1a6b 50%, #15803d 100%);
   color: #fff;
   font-weight: 800;
   font-size: 0.95rem;
@@ -3321,7 +3321,7 @@ p, li, .hero-text { font-size: 1rem; }
   .notice-bar-inner { padding: 8px 16px; }
 }
 
-/* Hero flush to top — no gap above, no white strip */
+/* Hero flush to top â€” no gap above, no white strip */
 body { margin: 0; padding: 0; }
 #root { margin: 0; padding: 0; }
 .site-shell > main, main#main-content { margin-top: 0; padding-top: 0; }
@@ -3378,7 +3378,7 @@ body { margin: 0; padding: 0; }
 [data-theme="dark"] .stats-institutional-footnote a { color: #c4b5fd; }
 [data-theme="dark"] .stats-institutional-item { border-left-color: #a78bfa; }
 
-/* Six-fact stats strip — matches 6 items in homeStats */
+/* Six-fact stats strip â€” matches 6 items in homeStats */
 @media (min-width: 901px) {
   .stats-institutional-inner { grid-template-columns: repeat(6, 1fr); }
 }
@@ -3439,7 +3439,7 @@ footer.footer small,
   color: #5a4a6e !important;
 }
 
-/* Brand block — was white text on dark bg, now dark text on white bg */
+/* Brand block â€” was white text on dark bg, now dark text on white bg */
 footer.footer .brand-footer strong,
 footer.footer .brand-footer small {
   color: #2d1454 !important;
@@ -3467,7 +3467,7 @@ footer.footer::before {
   opacity: 0.4 !important;
 }
 
-/* Portals row (Student portal · Staff portal · E-Library · Emergency) */
+/* Portals row (Student portal Â· Staff portal Â· E-Library Â· Emergency) */
 footer.footer .footer-portals a strong {
   color: #2d1454 !important;
 }
@@ -3499,7 +3499,7 @@ footer.footer .footer-portals span a {
 }
 
 /* =========================================================
-   FINAL FOOTER OVERRIDE — appended last so it always wins.
+   FINAL FOOTER OVERRIDE â€” appended last so it always wins.
    ========================================================= */
 footer.footer,
 footer.footer.footer-with-bg,
@@ -3610,7 +3610,7 @@ html, body, #root, .site-shell, .site-shell > main, main#main-content,
   background-image: none !important;
 }
 
-/* Hero section — white background, but keep the slideshow images visible.
+/* Hero section â€” white background, but keep the slideshow images visible.
    The slideshow is inside its own absolutely-positioned container, so
    making the <section> white doesn't hide the images. */
 .page-content > section:first-child {
@@ -3624,7 +3624,7 @@ html, body, #root, .site-shell, .site-shell > main, main#main-content,
 .hero--video,
 
 
-/* Cards, info blocks, tables, forms — keep white */
+/* Cards, info blocks, tables, forms â€” keep white */
 .info-card,
 .faculty-card,
 .school-card,
@@ -3708,7 +3708,7 @@ html, body, #root, .site-shell, .site-shell > main, main#main-content,
   background-image: none !important;
 }
 
-/* Footer — force white too */
+/* Footer â€” force white too */
 footer.footer,
 footer.footer.footer-with-bg,
 .footer-with-bg,
@@ -3727,7 +3727,7 @@ footer.footer a,
 .footer-with-bg a { color: #4c2585 !important; }
 footer.footer::before { display: none !important; }
 
-/* Newsletter strip — was purple gradient, make white */
+/* Newsletter strip â€” was purple gradient, make white */
 .newsletter-strip {
   background: #ffffff !important;
   background-color: #ffffff !important;
@@ -3748,7 +3748,7 @@ footer.footer::before { display: none !important; }
 }
 .newsletter-error { color: #b42318 !important; }
 
-/* CTA section — was purple gradient, make white with purple border */
+/* CTA section â€” was purple gradient, make white with purple border */
 .cta-section {
   background: #ffffff !important;
   background-color: #ffffff !important;
@@ -3773,7 +3773,7 @@ footer.footer::before { display: none !important; }
   border-color: #2d1454 !important;
 }
 
-/* Quote section — was purple, make white */
+/* Quote section â€” was purple, make white */
 .quote-section {
   background: #ffffff !important;
   background-image: none !important;
@@ -3796,7 +3796,7 @@ footer.footer::before { display: none !important; }
   color: #ffffff !important;
 }
 
-/* Stats strip — white */
+/* Stats strip â€” white */
 
 .stats-strip .stats-bg { display: none !important; }
 .stats-strip .stat-item strong,
@@ -3816,7 +3816,7 @@ footer.footer .footer-social-row {
 }
 footer.footer .footer-bottom { border-top-color: #e0d4ee !important; }
 
-/* Header stays untouched — do NOT override .header */
+/* Header stays untouched â€” do NOT override .header */
 
 /* =========================================================
    WHITE BACKGROUND EVERYWHERE BELOW THE HEADER
@@ -3830,7 +3830,7 @@ html, body, #root, .site-shell, .site-shell > main, main#main-content,
   background-image: none !important;
 }
 
-/* Hero section — white background, but keep the slideshow images visible.
+/* Hero section â€” white background, but keep the slideshow images visible.
    The slideshow is inside its own absolutely-positioned container, so
    making the <section> white doesn't hide the images. */
 .page-content > section:first-child {
@@ -3844,7 +3844,7 @@ html, body, #root, .site-shell, .site-shell > main, main#main-content,
 .hero--video,
 
 
-/* Cards, info blocks, tables, forms — keep white */
+/* Cards, info blocks, tables, forms â€” keep white */
 .info-card,
 .faculty-card,
 .school-card,
@@ -3928,7 +3928,7 @@ html, body, #root, .site-shell, .site-shell > main, main#main-content,
   background-image: none !important;
 }
 
-/* Footer — force white too */
+/* Footer â€” force white too */
 footer.footer,
 footer.footer.footer-with-bg,
 .footer-with-bg,
@@ -3947,7 +3947,7 @@ footer.footer a,
 .footer-with-bg a { color: #4c2585 !important; }
 footer.footer::before { display: none !important; }
 
-/* Newsletter strip — was purple gradient, make white */
+/* Newsletter strip â€” was purple gradient, make white */
 .newsletter-strip {
   background: #ffffff !important;
   background-color: #ffffff !important;
@@ -3968,7 +3968,7 @@ footer.footer::before { display: none !important; }
 }
 .newsletter-error { color: #b42318 !important; }
 
-/* CTA section — was purple gradient, make white with purple border */
+/* CTA section â€” was purple gradient, make white with purple border */
 .cta-section {
   background: #ffffff !important;
   background-color: #ffffff !important;
@@ -3993,7 +3993,7 @@ footer.footer::before { display: none !important; }
   border-color: #2d1454 !important;
 }
 
-/* Quote section — was purple, make white */
+/* Quote section â€” was purple, make white */
 .quote-section {
   background: #ffffff !important;
   background-image: none !important;
@@ -4016,7 +4016,7 @@ footer.footer::before { display: none !important; }
   color: #ffffff !important;
 }
 
-/* Stats strip — white */
+/* Stats strip â€” white */
 
 .stats-strip .stats-bg { display: none !important; }
 .stats-strip .stat-item strong,
@@ -4036,7 +4036,7 @@ footer.footer .footer-social-row {
 }
 footer.footer .footer-bottom { border-top-color: #e0d4ee !important; }
 
-/* Header stays untouched — do NOT override .header */
+/* Header stays untouched â€” do NOT override .header */
 
 /* =========================================================
    LIGHT PURPLE ACCENTS ON WHITE BASE
@@ -4045,7 +4045,7 @@ footer.footer .footer-bottom { border-top-color: #e0d4ee !important; }
    ========================================================= */
 
 :root {
-  --light-purple-bg: #faf7ff;        /* very pale lavender — reads as white */
+  --light-purple-bg: #faf7ff;        /* very pale lavender â€” reads as white */
   --light-purple-tint: #f4ecfa;      /* slightly stronger tint for accents */
   --light-purple-border: #e6daf5;    /* soft lavender border */
   --light-purple-accent: #c4b5fd;    /* clearly purple, still light */
@@ -4067,7 +4067,7 @@ footer.footer .footer-bottom { border-top-color: #e0d4ee !important; }
   border-color: var(--light-purple-border) !important;
 }
 
-/* Hover on cards — slightly stronger tint */
+/* Hover on cards â€” slightly stronger tint */
 .news-card:hover,
 .event-card:hover,
 .partner-card:hover,
@@ -4088,12 +4088,12 @@ hr,
   border-color: var(--light-purple-border) !important;
 }
 
-/* Section separators — thin lavender lines */
+/* Section separators â€” thin lavender lines */
 section + section {
   border-top: 1px solid var(--light-purple-border);
 }
 
-/* Footer gets the lightest tint — barely visible */
+/* Footer gets the lightest tint â€” barely visible */
 footer.footer,
 footer.footer.footer-with-bg,
 .footer-with-bg,
@@ -4103,7 +4103,7 @@ footer.footer.footer-with-bg,
   border-top: 1px solid var(--light-purple-border) !important;
 }
 
-/* Newsletter strip — light purple instead of flat white */
+/* Newsletter strip â€” light purple instead of flat white */
 .newsletter-strip {
   background-color: var(--light-purple-tint) !important;
   background-image: none !important;
@@ -4115,7 +4115,7 @@ footer.footer.footer-with-bg,
   border: 1px solid var(--light-purple-border) !important;
 }
 
-/* CTA section — light purple, purple button */
+/* CTA section â€” light purple, purple button */
 .cta-section {
   background-color: var(--light-purple-tint) !important;
   background-image: none !important;
@@ -4123,27 +4123,27 @@ footer.footer.footer-with-bg,
   border-bottom: 1px solid var(--light-purple-border) !important;
 }
 
-/* Quote section — light purple block, purple accents */
+/* Quote section â€” light purple block, purple accents */
 .quote-section {
   background-color: var(--light-purple-tint) !important;
   background-image: none !important;
 }
 
-/* Stats strip — white with a very faint tint so numbers pop */
+/* Stats strip â€” white with a very faint tint so numbers pop */
 
 
-/* Buttons — light purple hover state */
+/* Buttons â€” light purple hover state */
 .button-outline:hover {
   background-color: var(--light-purple-tint) !important;
   border-color: var(--light-purple-accent) !important;
 }
 
-/* Links — purple with light purple hover */
+/* Links â€” purple with light purple hover */
 a:not(.button):not(.btn):not(.nav-apply):hover {
   color: #4c2585 !important;
 }
 
-/* Eyebrow lines — light purple accent */
+/* Eyebrow lines â€” light purple accent */
 .eyebrow-line {
   background: var(--light-purple-accent) !important;
 }
@@ -4155,7 +4155,7 @@ a:not(.button):not(.btn):not(.nav-apply):hover {
   color: #4c2585 !important;
 }
 
-/* Feature-stat block — light purple */
+/* Feature-stat block â€” light purple */
 .feature-stat {
   background-color: var(--light-purple-bg) !important;
   border: 1px solid var(--light-purple-border) !important;
@@ -4209,10 +4209,10 @@ a:not(.button):not(.btn):not(.nav-apply):hover {
 /* Each fact */
 
 
-/* Numbers — dark purple, readable on the tinted image */
+/* Numbers â€” dark purple, readable on the tinted image */
 
 
-/* Labels — grey-purple */
+/* Labels â€” grey-purple */
 .stats-strip .stat-item span,
 .stats-strip .stat-label,
 .stats-institutional .stats-institutional-label {
@@ -4248,7 +4248,7 @@ a:not(.button):not(.btn):not(.nav-apply):hover {
 }
 
 /* =========================================================
-   Footer — one background image behind a light overlay.
+   Footer â€” one background image behind a light overlay.
    Change the image URL below to use a different photo.
    ========================================================= */
 footer.footer,
@@ -4339,7 +4339,7 @@ footer.footer .footer-bottom {
   display: none !important;
 }
 
-/* Text stays dark purple — readable through the white veil */
+/* Text stays dark purple â€” readable through the white veil */
 
 
 .stats-strip .stat-item span,
@@ -4381,7 +4381,7 @@ footer.footer .footer-bottom {
   display: none !important;
 }
 
-/* Each stat item — no icon, purple rule, clean */
+/* Each stat item â€” no icon, purple rule, clean */
 
 
 /* Hide the old icon circle and bar */
@@ -4390,10 +4390,10 @@ footer.footer .footer-bottom {
   display: none !important;
 }
 
-/* Numbers — dark purple, on the tinted image */
+/* Numbers â€” dark purple, on the tinted image */
 
 
-/* Labels — muted grey-purple */
+/* Labels â€” muted grey-purple */
 .stats-strip .stat-item span,
 .stats-strip .stat-label {
   font-family: 'Inter', system-ui, sans-serif !important;
@@ -4529,7 +4529,7 @@ footer.footer .footer-bottom {
 /* Hide old bars */
 .top-meta-bar, .notice-bar { display: none !important; }
 
-/* Responsive — keep everything on one line, hide less-critical parts */
+/* Responsive â€” keep everything on one line, hide less-critical parts */
 @media (max-width: 900px) {
   .top-strip { gap: 10px !important; font-size: 0.75rem !important; padding: 5px 12px !important; }
   .top-strip-notice { font-size: 0.75rem !important; }
@@ -4636,10 +4636,10 @@ footer.footer .footer-bottom {
   color: #cbd5e1 !important;
 }
 
-/* Numbers — white */
+/* Numbers â€” white */
 
 
-/* Labels — light lavender-white */
+/* Labels â€” light lavender-white */
 .stats-strip .stat-item span,
 .stats-strip .stat-label,
 .stats-institutional .stats-institutional-label {
@@ -4650,7 +4650,7 @@ footer.footer .footer-bottom {
   font-weight: 500 !important;
 }
 
-/* Purple rule beside each fact — light lavender so it's visible on purple */
+/* Purple rule beside each fact â€” light lavender so it's visible on purple */
 .stats-strip .stat-item,
 .stats-institutional .stats-institutional-item {
   border-left: 3px solid #c4b5fd !important;
@@ -4712,7 +4712,7 @@ footer.footer .footer-bottom {
   margin: 0 auto !important;
 }
 
-/* Foreground text — white, clearly readable on the image */
+/* Foreground text â€” white, clearly readable on the image */
 .stats-strip .stat-item,
 .stats-institutional .stats-institutional-item {
   position: relative !important;
@@ -5452,3 +5452,4 @@ html[data-scrolled] header.header .nav-icon-btn {
   /* hide desktop nav on mobile */
   .main-nav { display: none !important; }
 }
+
