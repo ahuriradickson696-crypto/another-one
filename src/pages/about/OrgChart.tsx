@@ -1,4 +1,4 @@
-import { ArrowRight } from 'lucide-react';
+﻿import { ArrowRight } from 'lucide-react';
 import { SubPageHero } from '@/components/SubPageHero';
 import { useRouter } from '@/router/Router';
 import { pageImages } from '@/data/pageImages';
@@ -37,7 +37,6 @@ export function OrgChart() {
         <div className="section-heading"><div><div className="eyebrow"><span className="eyebrow-line" /> Leadership hierarchy</div><h2>Our <em>governance structure.</em></h2></div></div>
         <p style={{ maxWidth: 720, marginBottom: 32, fontSize: 16, lineHeight: 1.75, color: 'var(--ink-soft)' }}>AVIU balances corporate oversight with academic self-governance. The General Meeting appoints the Board of Directors, which works alongside the University Council and Senate to ensure quality teaching, research and student experience.</p>
         <div style={{ width: '100%', maxWidth: 900, margin: '0 auto 40px', borderRadius: 12, overflow: 'hidden', border: '1px solid var(--border)', boxShadow: '0 8px 32px rgba(0,0,0,.08)', background: '#fff' }}>
-          <img src="/images/governance-structure.jpg" alt="AVIU governance structure diagram" style={{ width: '100%', height: 'auto', display: 'block' }} decoding="async" loading="lazy" />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 900, margin: '0 auto 40px' }}>
           {governance.map((section) => (
