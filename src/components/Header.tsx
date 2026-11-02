@@ -172,13 +172,12 @@ export function Header() {
             <Search size={19} />
           </button>
           
-          <a
-            className="nav-apply"
+          <button type="button" className="nav-apply" onClick={openApply}
             href="https://elearning.aviu.ac.ug/"
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center' }}
-          >Apply</a>
+          >Apply</button>
 
           <button
             type="button"
@@ -202,5 +201,6 @@ export function Header() {
     </>
   );
 }
+
 
 

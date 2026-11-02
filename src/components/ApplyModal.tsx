@@ -1,11 +1,11 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { ArrowRight, Check, X, Loader2, AlertCircle } from 'lucide-react';
 import { faculties } from '@/data/university';
 
 const intakes = [
-  { name: 'January Intake', period: 'January – April', applications: 'October – December', status: 'Open' },
-  { name: 'May Intake', period: 'May – August', applications: 'February – April', status: 'Open' },
-  { name: 'August Intake', period: 'August – December', applications: 'May – July', status: 'Open Now' },
+  { name: 'January Intake', period: 'January â€“ April', applications: 'October â€“ December', status: 'Open' },
+  { name: 'May Intake', period: 'May â€“ August', applications: 'February â€“ April', status: 'Open' },
+  { name: 'August Intake', period: 'August â€“ December', applications: 'May â€“ July', status: 'Open Now' },
 ];
 
 export function ApplyModal({
@@ -56,7 +56,7 @@ export function ApplyModal({
           throw new Error('Submission failed. Please email info@aviu.ac.ug or call Admissions.');
         }
       } else {
-        // No backend configured — open mailto fallback for production static hosts
+        // No backend configured â€” open mailto fallback for production static hosts
         const body = encodeURIComponent(
           `Name: ${form.full_name}
 Email: ${form.email}
@@ -66,7 +66,7 @@ Programme: ${form.programme}
 Intake: ${form.intake}
 Message: ${form.message}`
         );
-        window.location.href = `mailto:info@aviu.ac.ug?subject=AVIU Application — ${encodeURIComponent(form.full_name)}&body=${body}`;
+        window.location.href = `mailto:info@aviu.ac.ug?subject=AVIU Application â€” ${encodeURIComponent(form.full_name)}&body=${body}`;
       }
       setStatus('success');
     } catch (err) {
@@ -182,7 +182,7 @@ Message: ${form.message}`
                 >
                   <option value="" disabled>Select an intake</option>
                   {intakes.map((i) => (
-                    <option key={i} value={i}>{i} Intake</option>
+                    <option key={i.name} value={i.name}>{i.name} ({i.status})</option>
                   ))}
                 </select>
               </label>
@@ -219,3 +219,5 @@ Message: ${form.message}`
     </div>
   );
 }
+
+

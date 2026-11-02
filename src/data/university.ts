@@ -961,12 +961,12 @@ export type PartnerItem = {
 };
 
 export const partners: PartnerItem[] = [
-  { name: 'Regional Health Authority', type: 'Healthcare Partnership', image: '/images/partners/partner-01.jpg' },
-  { name: 'Pearson Edexcel', type: 'Academic Accreditation', image: '/images/partners/partner-02.jpg' },
-  { name: 'ASIC', type: 'Institutional Accreditation', image: '/images/partners/partner-03.jpg' },
-  { name: 'NCHE Uganda', type: 'National Accreditation', image: '/images/partners/partner-04.jpg' },
-  { name: 'Uganda Bankers Association', type: 'Industry Partnership', image: '/images/partners/partner-05.png' },
-  { name: 'Kampala City Council', type: 'Community Partnership', image: '/images/partners/partner-06.jpg' },
+  { name: 'NCHE Uganda', type: 'National Accreditation', image: '/images/partners/partner-01.jpg' },
+  { name: 'Ministry of Education & Sports', type: 'Government Partner', image: '/images/partners/partner-02.jpg' },
+  { name: 'RENU', type: 'Research Network', image: '/images/partners/partner-03.jpg' },
+  { name: 'AVIU Teaching Hospital', type: 'Clinical Training', image: '/images/partners/partner-04.jpg' },
+  { name: 'Metropolitan Safaris', type: 'Industry Partner', image: '/images/partners/partner-05.jpg' },
+  { name: 'Metropolitan FM 90.3', type: 'Media Partner', image: '/images/partners/partner-06.jpg' },
 ];
 
 export type NavLink = { label: string; path: string };
@@ -993,5 +993,8 @@ export const navLinks: NavLink[] = [
 export type FeeRow = { programme: string; level: string; perSemester: string; notes?: string };
 export const feeSchedule: FeeRow[] = [];
 export const feesLastUpdated = '';
+
+
+
 
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+﻿import { useEffect, useState } from 'react';
 import { ArrowRight, Check, Calendar, Clock, MapPin } from 'lucide-react';
 import { faculties, homeStats, testimonials, universityInfo, newsItems, events, partners } from '@/data/university';
 import { useRouter } from '@/router/Router';
@@ -15,6 +15,7 @@ import { t, defaultLanguage, type LanguageCode } from '@/lib/i18n';
 import { CatalogImage } from '@/components/CatalogImage';
 import { LiveClock } from '@/components/LiveClock';
 import ViceChancellorMessage from "@/components/ViceChancellorMessage";
+import ChancellorMessage from "@/components/ChancellorMessage";
 
 const PURPLE_DARK = '#2d1454';
 const PURPLE_SOFT = '#c4b5fd';
@@ -50,7 +51,7 @@ export function Home() {
           <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
             <span style={{ width: 32, height: 2, background: "#c4b5fd" }}></span>
             <span style={{ color: "#c4b5fd", fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700 }}>
-              Est. 2016  ·  NCHE-accredited  ·  Nabweru, Uganda
+              Est. 2016  Â·  NCHE-accredited  Â·  Nabweru, Uganda
             </span>
           </div>
 
@@ -72,7 +73,7 @@ export function Home() {
           {/* Extra line */}
           <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.95rem", lineHeight: 1.6, maxWidth: 520, margin: "0 0 32px 0" }}>
             Bachelor degrees in Education, Business & ICT, Nursing and Social Sciences.<br />
-            January · May · August intakes.
+            January Â· May Â· August intakes.
           </p>
 
           {/* Buttons */}
@@ -87,7 +88,10 @@ export function Home() {
         </div>
       </section>
 
+      <ChancellorMessage />
+
       <ViceChancellorMessage />
+
 
       {/* PROGRAMMES */}
       <section className="section-pad">
@@ -149,7 +153,7 @@ export function Home() {
         </div>
         <div className="features-grid">
           {[
-            'Accredited by the National Council for Higher Education (NCHE) — unche.or.ug',
+            'Accredited by the National Council for Higher Education (NCHE) â€” unche.or.ug',
             'Hands-on, competence-based teaching with field attachments',
             'Bachelor programmes across Education, Business & ICT, Nursing and Social Sciences',
             'Technology-enhanced learning and e-learning platform',
@@ -157,7 +161,7 @@ export function Home() {
             'Student engagement in start-ups, community and industry projects',
             'Three main intakes per year: January, May and August',
             'Merit scholarships and support options (details from Admissions)',
-            'Nabweru campus, Wakiso District — accessible from Kampala',
+            'Nabweru campus, Wakiso District â€” accessible from Kampala',
           ].map((item, i) => (
             <div className="feature-item" key={i}>
               <Check size={18} />
@@ -222,9 +226,15 @@ export function Home() {
         </div>
         <div className="partners-grid">
           {partners.map((p) => (
-            <div className="partner-card" key={p.name}>
-              <strong>{p.name}</strong>
-              <span>{p.type}</span>
+            <div className="partner-card" key={p.name} title={p.name}>
+              {p.image && (
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  loading="lazy"
+                  style={{ display: "block", maxHeight: "80px", maxWidth: "180px", width: "auto", height: "auto", objectFit: "contain", margin: "0 auto" }}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -245,6 +255,8 @@ export function Home() {
     </div>
   );
 }
+
+
 
 
 
