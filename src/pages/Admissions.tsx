@@ -207,7 +207,7 @@ export function Admissions() {
           <h2>Apply today.</h2>
           <p>Applications are now open for all intakes — January, May and August.</p>
         </div>
-        <button className="button button-light" onClick={openApply}>
+        <button className="button button-light" onClick={() => openApply()}>
           Start application <ArrowRight size={17} />
         </button>
       </section>

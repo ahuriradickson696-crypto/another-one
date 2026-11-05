@@ -1,0 +1,138 @@
+﻿import { SubPageHero } from '@/components/SubPageHero';
+import { pageImages } from '@/data/pageImages';
+import { staffMembers } from '@/data/university';
+
+export function Leadership() {
+  const administrative = staffMembers.filter((s: any) => s.category === 'Administrative');
+  const deans = staffMembers.filter((s: any) => s.role && s.role.includes('Dean'));
+
+  const renderCard = (member: any, featured = false) => (
+    <div
+      key={member.name}
+      style={{
+        background: featured ? '#2d1454' : '#fff',
+        color: featured ? '#fff' : '#2d1454',
+        borderRadius: '16px',
+        padding: '24px',
+        border: featured ? 'none' : '1px solid #e0d4ee',
+        boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      <div
+        style={{
+          width: '72px',
+          height: '72px',
+          borderRadius: '50%',
+          background: featured ? 'rgba(255,255,255,0.15)' : '#f0e8fa',
+          color: featured ? '#fff' : '#3d1a6b',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '24px',
+          fontWeight: 800,
+          marginBottom: '16px',
+        }}
+      >
+        {member.initials || member.name.split(' ').map((n: string) => n[0]).join('').slice(0, 2)}
+      </div>
+      <h3 style={{ fontSize: '17px', margin: '0 0 6px', fontWeight: 700, lineHeight: 1.3 }}>
+        {member.name}
+      </h3>
+      <p style={{ fontSize: '13px', color: featured ? '#c4b5fd' : '#8a7fa0', margin: '0 0 4px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+        {member.role}
+      </p>
+      {member.qualification && (
+        <p style={{ fontSize: '12px', color: featured ? '#a78bfa' : '#5a4b6b', margin: '4px 0 0' }}>
+          {member.qualification}
+        </p>
+      )}
+    </div>
+  );
+
+  return (
+    <div style={{ background: '#f9f6fd', minHeight: '100vh', paddingBottom: '60px' }}>
+      <SubPageHero
+        images={pageImages.about}
+        eyebrow="About AVIU"
+        title={<>Leadership &amp; <em>Governance</em></>}
+        subtitle="Guided by NCHE standards, our leadership team brings decades of academic, administrative and industry expertise to steer AVIU's mission."
+        crumbs={[
+          { label: 'Home', path: '/' },
+          { label: 'About', path: '/about' },
+          { label: 'Leadership', path: '/about/leadership' },
+        ]}
+      />
+
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '60px 20px' }}>
+
+        {/* SECTION: EXECUTIVE LEADERSHIP */}
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <p style={{ color: '#3d1a6b', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>
+            Executive Leadership
+          </p>
+          <h2 style={{ fontSize: '32px', color: '#2d1454', margin: '0 0 12px', fontFamily: "'Playfair Display', serif" }}>
+            The people steering AVIU
+          </h2>
+          <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
+            Our executive team is appointed by the University Council and Board of Directors, in accordance with the Universities and Other Tertiary Institutions Act.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
+          {administrative.slice(0, 8).map((member: any, idx: number) => renderCard(member, idx === 1))}
+        </div>
+
+        {/* SECTION: FACULTY DEANS */}
+        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+          <p style={{ color: '#3d1a6b', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>
+            Academic Leadership
+          </p>
+          <h2 style={{ fontSize: '32px', color: '#2d1454', margin: '0 0 12px', fontFamily: "'Playfair Display', serif" }}>
+            Deans of Faculties
+          </h2>
+          <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '600px', margin: '0 auto', lineHeight: 1.6 }}>
+            Our deans are senior academics responsible for curriculum, research, and academic quality within their faculties.
+          </p>
+        </div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '24px', marginBottom: '60px' }}>
+          {deans.map((member: any) => renderCard(member))}
+        </div>
+
+        {/* SECTION: GOVERNANCE FRAMEWORK */}
+        <div style={{ background: '#fff', borderRadius: '20px', padding: '40px', border: '1px solid #e0d4ee' }}>
+          <h3 style={{ fontSize: '24px', color: '#2d1454', margin: '0 0 20px', textAlign: 'center' }}>
+            Governance Framework (NCHE Standards)
+          </h3>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '20px' }}>
+            <div style={{ padding: '20px', background: '#f9f6fd', borderRadius: '12px' }}>
+              <div style={{ fontSize: '32px', marginBottom: '8px' }}>🏛️</div>
+              <h4 style={{ fontSize: '15px', color: '#3d1a6b', margin: '0 0 6px' }}>Board of Directors</h4>
+              <p style={{ fontSize: '13px', color: '#5a4b6b', margin: 0, lineHeight: 1.5 }}>Fiduciary oversight, institutional strategy and long-term sustainability.</p>
+            </div>
+            <div style={{ padding: '20px', background: '#f9f6fd', borderRadius: '12px' }}>
+              <div style={{ fontSize: '32px', marginBottom: '8px' }}>🎓</div>
+              <h4 style={{ fontSize: '15px', color: '#3d1a6b', margin: '0 0 6px' }}>Chancellor</h4>
+              <p style={{ fontSize: '13px', color: '#5a4b6b', margin: 0, lineHeight: 1.5 }}>Ceremonial head; confers degrees and represents AVIU at official functions.</p>
+            </div>
+            <div style={{ padding: '20px', background: '#f9f6fd', borderRadius: '12px' }}>
+              <div style={{ fontSize: '32px', marginBottom: '8px' }}>📋</div>
+              <h4 style={{ fontSize: '15px', color: '#3d1a6b', margin: '0 0 6px' }}>University Council</h4>
+              <p style={{ fontSize: '13px', color: '#5a4b6b', margin: 0, lineHeight: 1.5 }}>Policy-making body; approves budgets, senior appointments and strategy.</p>
+            </div>
+            <div style={{ padding: '20px', background: '#f9f6fd', borderRadius: '12px' }}>
+              <div style={{ fontSize: '32px', marginBottom: '8px' }}>⚖️</div>
+              <h4 style={{ fontSize: '15px', color: '#3d1a6b', margin: '0 0 6px' }}>Senate</h4>
+              <p style={{ fontSize: '13px', color: '#5a4b6b', margin: 0, lineHeight: 1.5 }}>Supreme academic authority; approves programmes and examination results.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  );
+}

@@ -7,11 +7,11 @@ import { pageImages } from '@/data/pageImages';
 const publications = [
   { title: 'Efficacy of Traditional Herbal Medicine in Treating Malaria: A Comparative Study', author: 'Dr. Robert Kato et al.', journal: 'East African Medical Journal, 2025', type: 'Journal Article' },
   { title: 'AI-Powered Crop Disease Detection: A Mobile Solution for Smallholder Farmers', author: 'Dr. Samuel Wamala et al.', journal: 'Journal of African Computing Research, 2025', type: 'Conference Paper' },
-  { title: 'Inclusive Education Practices in Ugandan Primary Schools: A Two-Year Study', author: 'Dr. Esther Namaganda et al.', journal: 'International Journal of Inclusive Education, 2024', type: 'Journal Article' },
-  { title: 'Simulation-Based Learning and Clinical Competence in Nursing Education', author: 'Prof. Janet Amongi et al.', journal: 'Journal of Nursing Education, 2024', type: 'Journal Article' },
-  { title: 'Digital Financial Inclusion and Mobile Money Adoption in East Africa', author: 'Prof. David Ssali et al.', journal: 'African Journal of Business Management, 2025', type: 'Working Paper' },
+  { title: 'Inclusive Education Practices in Ugandan Primary Schools: A Two-Year Study', author: 'Dr. Dr. Mategeko Betty et al.', journal: 'International Journal of Inclusive Education, 2024', type: 'Journal Article' },
+  { title: 'Simulation-Based Learning and Clinical Competence in Nursing Education', author: 'Prof. Ms. Tusiime Phoebe et al.', journal: 'Journal of Nursing Education, 2024', type: 'Journal Article' },
+  { title: 'Digital Financial Inclusion and Mobile Money Adoption in East Africa', author: 'Prof. Dr. Ariyo Kazaara Gracious et al.', journal: 'African Journal of Business Management, 2025', type: 'Working Paper' },
   { title: 'Community Health Outreach: Measuring Impact in Urban Kampala', author: 'Dr. Alice Nabwire et al.', journal: 'Uganda Public Health Review, 2025', type: 'Journal Article' },
-  { title: 'Entrepreneurship Education and Student Startup Success', author: 'Prof. David Ssali et al.', journal: 'Journal of Entrepreneurship Education, 2024', type: 'Journal Article' },
+  { title: 'Entrepreneurship Education and Student Startup Success', author: 'Prof. Dr. Ariyo Kazaara Gracious et al.', journal: 'Journal of Entrepreneurship Education, 2024', type: 'Journal Article' },
   { title: 'Technology-Enhanced Learning in Ugandan Higher Education', author: 'Dr. Samuel Wamala et al.', journal: 'Journal of Educational Technology, 2023', type: 'Journal Article' },
 ];
 

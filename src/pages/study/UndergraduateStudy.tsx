@@ -20,7 +20,7 @@ export function UndergraduateStudy() {
         eyebrow="Degree level"
         title={<>Undergraduate <em>Study</em></>}
         subtitle="Begin your academic journey with a bachelor's degree, diploma, or certificate. Our undergraduate programmes combine theory with hands-on practice to prepare you for the workforce or further study."
-        crumbs={[{ label: 'Home', path: '/' }, { label: 'Programs', path: '/programs' }, { label: 'Undergraduate', path: '/programs/undergraduate' }]}
+        crumbs={[{ label: 'Home', path: '/' }, { label: 'Programs', path: '/programmes' }, { label: 'Undergraduate', path: '/study/undergraduate' }]}
       />
 
       <section className="section-pad">
@@ -113,7 +113,7 @@ export function UndergraduateStudy() {
           <h2>Apply for undergraduate study.</h2>
           <p>Applications are now open for all intakes — January, May, and August.</p>
         </div>
-        <button className="button button-light" onClick={openApply}>Apply now <ArrowRight size={17} /></button>
+        <button className="button button-light" onClick={() => openApply()}>Apply now <ArrowRight size={17} /></button>
       </section>
     </div>
   );

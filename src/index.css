@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -5411,19 +5411,7 @@ html[data-scrolled] header.header .nav-icon-btn {
 }
 
 /* Instagram-style mobile tab bar */
-.mobile-tab-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: none;
-  grid-template-columns: repeat(5, 1fr);
-  background: #ffffff;
-  border-top: 1px solid #e5e5e5;
-  padding: 8px 4px calc(8px + env(safe-area-inset-bottom));
-  z-index: 9000;
-  box-shadow: 0 -2px 12px rgba(0,0,0,0.05);
-}
+
 .mobile-tab {
   display: flex;
   flex-direction: column;
@@ -5447,9 +5435,429 @@ html[data-scrolled] header.header .nav-icon-btn {
   line-height: 1;
 }
 @media (max-width: 768px) {
-  .mobile-tab-bar { display: grid; }
+  
   body { padding-bottom: 68px; }
   /* hide desktop nav on mobile */
   .main-nav { display: none !important; }
 }
 
+
+/* ============================================================
+   TYPOGRAPHY RESET — International Standard (WCAG 2.2 AA)
+   Added: ensures minimum sizes, consistent scale across all pages.
+   Base scale: 16px root, modular ratio 1.25 (Major Third)
+   ============================================================ */
+
+/* ----- Root scale ----- */
+:root {
+  --typo-xs:    0.8125rem;  /* 13px  — captions, meta, legal  */
+  --typo-sm:    0.875rem;   /* 14px  — small text, labels     */
+  --typo-base:  1rem;       /* 16px  — body                    */
+  --typo-md:    1.0625rem;  /* 17px  — lead body              */
+  --typo-lg:    1.125rem;   /* 18px  — card headings          */
+  --typo-xl:    1.25rem;    /* 20px  — h4                     */
+  --typo-h3:    1.5rem;     /* 24px  — h3                     */
+  --typo-h2:    clamp(1.75rem, 3vw, 2.25rem);  /* 28–36px — h2   */
+  --typo-h1:    clamp(2.25rem, 4.5vw, 3.25rem);/* 36–52px — h1   */
+  --typo-hero:  clamp(2.5rem, 5vw, 3.75rem);   /* 40–60px — hero */
+
+  --typo-leading-body:    1.65;
+  --typo-leading-heading: 1.15;
+  --typo-leading-tight:   1.05;
+}
+
+/* ----- Body ----- */
+html { font-size: 16px; }         /* WCAG root */
+body {
+  font-size: var(--typo-base);
+  line-height: var(--typo-leading-body);
+}
+
+p, li, .body-text, .hero-text, .page-hero-text {
+  font-size: var(--typo-base);
+  line-height: var(--typo-leading-body);
+}
+
+/* ----- Headings ----- */
+h1, .hero-h1, .hero h1, .page-hero h1 {
+  font-size: var(--typo-hero) !important;
+  line-height: var(--typo-leading-tight) !important;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+
+h2, .section-heading h2, .section-intro h2, .cta-section h2 {
+  font-size: var(--typo-h2) !important;
+  line-height: var(--typo-leading-heading) !important;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+
+h3 {
+  font-size: var(--typo-h3) !important;
+  line-height: 1.3 !important;
+  font-weight: 600;
+}
+
+h4, h5, h6 {
+  font-size: var(--typo-xl) !important;
+  line-height: 1.35 !important;
+  font-weight: 600;
+}
+
+/* ----- Cards ----- */
+.school-card strong,
+.faculty-card strong,
+.news-card h3,
+.event-body h3,
+.staff-card strong,
+.library-card strong,
+.student-life-card strong,
+.research-card strong {
+  font-size: var(--typo-lg) !important;
+  line-height: 1.35 !important;
+  font-weight: 600 !important;
+}
+
+/* ----- Card body text ----- */
+.news-card p,
+.event-body p,
+.school-count,
+.faculty-count,
+.programme-desc,
+.research-card p,
+.staff-role,
+.library-card p,
+.student-life-card p {
+  font-size: var(--typo-sm) !important;
+  line-height: 1.6 !important;
+}
+
+/* ----- Meta / captions / labels — 13px floor ----- */
+.eyebrow,
+.news-meta,
+.news-category,
+.news-date,
+.event-date span,
+.event-meta,
+.event-type,
+.staff-role,
+.programme-duration,
+.programme-faculty-tag,
+.footer-bottom,
+.top-strip,
+.top-strip-notice,
+.live-clock-tz,
+.btn-small,
+.text-link,
+.brand small {
+  font-size: var(--typo-xs) !important;
+  line-height: 1.45 !important;
+}
+
+/* ----- Buttons ----- */
+button, .button, .btn-primary, .btn-outline {
+  font-size: var(--typo-sm) !important;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* ----- Forms ----- */
+input, select, textarea, label, .form-error {
+  font-size: var(--typo-base) !important;
+  line-height: 1.5;
+}
+
+/* ----- Navigation ----- */
+.main-nav > a, .nav-group > a, .nav-dropdown a {
+  font-size: var(--typo-sm) !important;
+  line-height: 1.4;
+}
+
+/* ----- Footer ----- */
+footer.footer, .footer-with-bg, .footer a, .footer strong, .footer h4 {
+  font-size: var(--typo-sm);
+  line-height: 1.6;
+}
+.footer h4, .footer-with-bg h4 {
+  font-size: var(--typo-base) !important;
+  font-weight: 700;
+}
+
+/* ----- Mobile overrides — same floor, tighter leading ----- */
+@media (max-width: 640px) {
+  :root {
+    --typo-h1:    clamp(1.75rem, 6vw, 2.5rem);
+    --typo-hero:  clamp(2rem, 7vw, 2.75rem);
+    --typo-h2:    clamp(1.5rem, 4.5vw, 2rem);
+    --typo-h3:    1.375rem;  /* 22px */
+  }
+  body { font-size: var(--typo-base); }
+  p, li { font-size: var(--typo-base) !important; }
+}
+
+/* ----- Do not allow anything to shrink below 13px ----- */
+.text-link, .eyebrow, .news-meta, .news-date, .event-meta {
+  min-font-size: 0.8125rem; /* fallback hint — browsers use line above */
+}
+
+/* ============================================================
+   TYPOGRAPHY RESET — International Standard (WCAG 2.2 AA)
+   Applied: final overrides that guarantee minimum sizes.
+   Base scale: 16px root · modular ratio ~1.25
+   ============================================================ */
+
+:root {
+  --typo-xs:    0.8125rem;   /* 13px — captions, meta, legal */
+  --typo-sm:    0.875rem;    /* 14px — small text, labels */
+  --typo-base:  1rem;        /* 16px — body */
+  --typo-md:    1.0625rem;   /* 17px — lead body */
+  --typo-lg:    1.125rem;    /* 18px — card headings */
+  --typo-xl:    1.25rem;     /* 20px — h4 */
+  --typo-h3:    1.5rem;      /* 24px — h3 */
+  --typo-h2:    clamp(1.75rem, 3vw, 2.25rem);   /* 28–36px — h2 */
+  --typo-h1:    clamp(2.25rem, 4.5vw, 3.25rem); /* 36–52px — h1 */
+  --typo-hero:  clamp(2.5rem, 5vw, 3.75rem);    /* 40–60px — hero */
+
+  --typo-leading-body:    1.65;
+  --typo-leading-heading: 1.15;
+  --typo-leading-tight:   1.05;
+}
+
+html { font-size: 16px; }
+body { font-size: var(--typo-base); line-height: var(--typo-leading-body); }
+p, li, .body-text, .hero-text, .page-hero-text { font-size: var(--typo-base); line-height: var(--typo-leading-body); }
+
+h1, .hero-h1, .hero h1, .page-hero h1 {
+  font-size: var(--typo-hero) !important;
+  line-height: var(--typo-leading-tight) !important;
+  letter-spacing: -0.03em;
+  font-weight: 500;
+}
+h2, .section-heading h2, .section-intro h2, .cta-section h2 {
+  font-size: var(--typo-h2) !important;
+  line-height: var(--typo-leading-heading) !important;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+}
+h3 { font-size: var(--typo-h3) !important; line-height: 1.3 !important; font-weight: 600; }
+h4, h5, h6 { font-size: var(--typo-xl) !important; line-height: 1.35 !important; font-weight: 600; }
+
+.school-card strong,
+.faculty-card strong,
+.news-card h3,
+.event-body h3,
+.staff-card strong,
+.library-card strong,
+.student-life-card strong,
+.research-card strong {
+  font-size: var(--typo-lg) !important;
+  line-height: 1.35 !important;
+  font-weight: 600 !important;
+}
+
+.news-card p,
+.event-body p,
+.school-count,
+.faculty-count,
+.programme-desc,
+.research-card p,
+.staff-role,
+.library-card p,
+.student-life-card p {
+  font-size: var(--typo-sm) !important;
+  line-height: 1.6 !important;
+}
+
+.eyebrow, .news-meta, .news-category, .news-date, .event-date span,
+.event-meta, .event-type, .staff-role, .programme-duration,
+.programme-faculty-tag, .footer-bottom, .top-strip, .top-strip-notice,
+.live-clock-tz, .btn-small, .text-link, .brand small {
+  font-size: var(--typo-xs) !important;
+  line-height: 1.45 !important;
+}
+
+button, .button, .btn-primary, .btn-outline {
+  font-size: var(--typo-sm) !important;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+input, select, textarea, label, .form-error {
+  font-size: var(--typo-base) !important;
+  line-height: 1.5;
+}
+
+.main-nav > a, .nav-group > a, .nav-dropdown a {
+  font-size: var(--typo-sm) !important;
+  line-height: 1.4;
+}
+
+footer.footer, .footer-with-bg, .footer a, .footer strong, .footer h4 {
+  font-size: var(--typo-sm);
+  line-height: 1.6;
+}
+.footer h4, .footer-with-bg h4 {
+  font-size: var(--typo-base) !important;
+  font-weight: 700;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --typo-h1:   clamp(1.75rem, 6vw, 2.5rem);
+    --typo-hero: clamp(2rem, 7vw, 2.75rem);
+    --typo-h2:   clamp(1.5rem, 4.5vw, 2rem);
+    --typo-h3:   1.375rem;
+  }
+  body { font-size: var(--typo-base); }
+  p, li { font-size: var(--typo-base) !important; }
+}
+
+
+
+@media (max-width: 768px) {
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .page-content {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+}
+
+@media (min-width: 769px) {
+  
+  body, .page-content {
+    padding-bottom: 0 !important;
+  }
+}
+
+@media print {
+  
+}
+
+@media (prefers-reduced-motion: reduce) {
+  
+}
+
+/* ============================================================
+   MOBILE TAB BAR — final clean rules (single source of truth)
+   ============================================================ */
+
+/* Hide on desktop */
+.mobile-tab-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Body padding to prevent content hiding */
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .page-content {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* The bar */
+  .mobile-tab-bar {
+    display: grid !important;
+    grid-template-columns: repeat(5, 1fr) !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 9000 !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    backdrop-filter: blur(20px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+    border-top: 1px solid rgba(61, 26, 107, 0.1) !important;
+    box-shadow: 0 -4px 24px rgba(45, 20, 84, 0.1) !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    transform: translateY(0);
+  }
+
+  /* Hidden state — slide down */
+  .mobile-tab-bar.is-hidden {
+    transform: translateY(100%) !important;
+  }
+
+  /* Tabs */
+  .mobile-tab-bar .mobile-tab {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 3px !important;
+    padding: 10px 4px 12px !important;
+    min-height: 56px !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    color: #6b5f7a !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.02em !important;
+    position: relative !important;
+    transition: color 0.2s ease !important;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-tab-bar .mobile-tab svg {
+    width: 22px !important;
+    height: 22px !important;
+    transition: transform 0.2s ease !important;
+  }
+
+  .mobile-tab-bar .mobile-tab.is-active {
+    color: #3d1a6b !important;
+    font-weight: 700 !important;
+  }
+
+  .mobile-tab-bar .mobile-tab.is-active svg {
+    transform: scale(1.1) !important;
+  }
+
+  .mobile-tab-bar .mobile-tab.is-active::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 4px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 4px !important;
+    height: 4px !important;
+    border-radius: 50% !important;
+    background: #3d1a6b !important;
+  }
+
+  .mobile-tab-bar .mobile-tab span {
+    font-size: 10px !important;
+    line-height: 1.1 !important;
+    text-align: center !important;
+  }
+}
+
+@media print {
+  .mobile-tab-bar { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-tab-bar { transition: none !important; }
+}

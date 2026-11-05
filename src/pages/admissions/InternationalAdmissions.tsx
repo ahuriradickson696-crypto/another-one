@@ -141,7 +141,7 @@ export function InternationalAdmissions() {
           <h2>Start your journey.</h2>
           <p>Apply today and join our growing international community.</p>
         </div>
-        <button className="button button-light" onClick={openApply}>Apply now <ArrowRight size={17} /></button>
+        <button className="button button-light" onClick={() => openApply()}>Apply now <ArrowRight size={17} /></button>
       </section>
     </div>
   );

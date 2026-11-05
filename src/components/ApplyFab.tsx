@@ -6,7 +6,7 @@ export function ApplyFab() {
     <button
       type="button"
       className="apply-fab"
-      onClick={openApply}
+      onClick={() => openApply()}
       aria-label="Apply Now to AVIU"
       style={{ display: 'flex', alignItems: 'center', gap: '8px' }}
     >

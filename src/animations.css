@@ -762,3 +762,154 @@ a, button, [role="button"], label, select { touch-action: manipulation; }
   max-width: 160px;
   object-fit: contain;
 }
+
+/* ============================================================
+   MODERN MOBILE BOTTOM NAVIGATION
+   Glassmorphic · Auto-hide on scroll · Safe-area aware
+   Applied as final overrides
+   ============================================================ */
+
+/* ----- Base structure: only visible on mobile ----- */
+.mobile-bottom-nav {
+  display: none; /* hidden on desktop */
+}
+
+@media (max-width: 768px) {
+  /* Content padding — nav never covers text */
+  body {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .page-content {
+    padding-bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* The nav itself */
+  .mobile-bottom-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 90;
+
+    /* Glassmorphic background */
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-top: 1px solid rgba(61, 26, 107, 0.08);
+
+    /* Subtle upward shadow */
+    box-shadow: 0 -4px 24px rgba(45, 20, 84, 0.08);
+
+    /* Respect iPhone notch / home indicator */
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    /* Smooth slide */
+    transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+
+  /* Hide when scrolling down */
+  .mobile-bottom-nav.is-hidden {
+    transform: translateY(100%);
+  }
+
+  /* Each tab */
+  .mobile-bottom-nav > a,
+  .mobile-bottom-nav > button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 10px 6px 12px;
+    min-height: 56px;
+    color: #6b5f7a;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease, background 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+  }
+
+  /* Tap feedback */
+  .mobile-bottom-nav > a:active,
+  .mobile-bottom-nav > button:active {
+    background: rgba(61, 26, 107, 0.06);
+  }
+
+  /* Icons */
+  .mobile-bottom-nav svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 1.8;
+    transition: transform 0.2s ease, stroke-width 0.2s ease;
+  }
+
+  /* Active state — filled icon + colored */
+  .mobile-bottom-nav > a.active,
+  .mobile-bottom-nav > a[aria-current="page"],
+  .mobile-bottom-nav > button.active {
+    color: #3d1a6b;
+    font-weight: 700;
+  }
+
+  .mobile-bottom-nav > a.active svg,
+  .mobile-bottom-nav > a[aria-current="page"] svg,
+  .mobile-bottom-nav > button.active svg {
+    stroke-width: 2.5;
+    transform: scale(1.08);
+  }
+
+  /* Small pill underneath active item */
+  .mobile-bottom-nav > a.active::after,
+  .mobile-bottom-nav > a[aria-current="page"]::after,
+  .mobile-bottom-nav > button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #3d1a6b;
+  }
+
+  /* Labels — always shown but smaller on inactive */
+  .mobile-bottom-nav > a span,
+  .mobile-bottom-nav > button span {
+    font-size: 10px;
+    line-height: 1.1;
+    text-align: center;
+  }
+}
+
+/* Hide on desktop entirely */
+@media (min-width: 769px) {
+  .mobile-bottom-nav {
+    display: none !important;
+  }
+  body, .page-content {
+    padding-bottom: 0 !important;
+  }
+}
+
+/* Print — never show */
+@media print {
+  .mobile-bottom-nav { display: none !important; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .mobile-bottom-nav {
+    transition: none !important;
+  }
+}

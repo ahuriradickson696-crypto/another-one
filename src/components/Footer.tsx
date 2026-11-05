@@ -6,7 +6,7 @@ const columns = [
   {
     title: 'Study & Admissions',
     links: [
-      { label: 'All programmes', path: '/programs' },
+      { label: 'All programmes', path: '/programmes' },
       { label: 'Undergraduate', path: '/prospective/undergraduates' },
       { label: 'Postgraduate', path: '/prospective/graduates' },
       { label: 'How to apply', path: '/admissions/how-to-apply' },
@@ -18,6 +18,7 @@ const columns = [
     title: 'About AVIU',
     links: [
       { label: 'Our story', path: '/about' },
+          { label: 'University Anthem', path: '/about/anthem' },
       { label: 'Leadership', path: '/about/leadership' },
       { label: 'Campus', path: '/about/campus' },
       { label: 'Careers', path: '/about/careers' },

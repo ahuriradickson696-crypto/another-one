@@ -15,7 +15,7 @@ export function NotFound() {
   }, []);
 
   const links = [
-    { label: 'Programmes', path: '/programs' },
+    { label: 'Programmes', path: '/programmes' },
     { label: 'How to apply', path: '/admissions/how-to-apply' },
     { label: 'Fees & payment', path: '/fees' },
     { label: 'News', path: '/news' },

@@ -36,7 +36,7 @@ export function CourseFinder() {
         eyebrow="Course discovery"
         title={<>Course <em>Finder</em></>}
         subtitle="Search and filter all programmes at AVIU by keyword, level, and faculty. Find the right programme for your career goals."
-        crumbs={[{ label: 'Home', path: '/' }, { label: 'Programs', path: '/programs' }, { label: 'Course Finder', path: '/programs/course-finder' }]}
+        crumbs={[{ label: 'Home', path: '/' }, { label: 'Programs', path: '/programmes' }, { label: 'Course Finder', path: '/study/course-finder' }]}
       />
 
       <section className="section-pad">
@@ -133,7 +133,7 @@ export function CourseFinder() {
           <h2>Start your application.</h2>
           <p>Apply online or contact admissions for guidance on your chosen programme.</p>
         </div>
-        <button className="button button-light" onClick={openApply}>Apply now <ArrowRight size={17} /></button>
+        <button className="button button-light" onClick={() => openApply()}>Apply now <ArrowRight size={17} /></button>
       </section>
     </div>
   );

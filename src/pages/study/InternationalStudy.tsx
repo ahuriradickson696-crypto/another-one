@@ -27,7 +27,7 @@ export function InternationalStudy() {
         eyebrow="International"
         title={<>International <em>Study Options</em></>}
         subtitle="AVIU welcomes students from across East Africa and the world. Explore study abroad opportunities, exchange programmes, and pathway courses designed for international applicants."
-        crumbs={[{ label: 'Home', path: '/' }, { label: 'Programs', path: '/programs' }, { label: 'International', path: '/programs/international' }]}
+        crumbs={[{ label: 'Home', path: '/' }, { label: 'Programs', path: '/programmes' }, { label: 'International', path: '/study/international' }]}
       />
 
       <section className="section-pad">
@@ -114,7 +114,7 @@ export function InternationalStudy() {
           <h2>Join our international community.</h2>
           <p>Students from across the region choose AVIU for quality education in a welcoming environment.</p>
         </div>
-        <button className="button button-light" onClick={openApply}>Apply now <ArrowRight size={17} /></button>
+        <button className="button button-light" onClick={() => openApply()}>Apply now <ArrowRight size={17} /></button>
       </section>
     </div>
   );

@@ -1,0 +1,202 @@
+import { SubPageHero } from '@/components/SubPageHero';
+import { pageImages } from '@/data/pageImages';
+import { staffDirectory } from '@/data/staffDirectory';
+
+export function Leadership() {
+  // --- Group staff by role category from staffDirectory ---
+  // Executive: Management dept OR top leadership roles
+  const executive = staffDirectory.filter((s) =>
+    s.dept === 'Management' &&
+    (
+      s.role === 'Chancellor' ||
+      s.role === 'Vice Chancellor' ||
+      s.role === 'Deputy Vice Chancellor' ||
+      s.role.startsWith('Chairperson') ||
+      s.role === 'University Secretary' ||
+      s.role === 'Academic Registrar' ||
+      s.role === 'Quality Assurance Director' ||
+      s.role === 'University Bursar' ||
+      s.role === 'Dean of Students'
+    )
+  );
+
+  // Senior administrative (still Management dept, but not the above)
+  const executiveNames = new Set(executive.map((s) => s.name));
+  const administrative = staffDirectory.filter(
+    (s) => s.dept === 'Management' && !executiveNames.has(s.name)
+  );
+
+  // Deans (any role containing "Dean" but not "Dean of Students")
+  const deans = staffDirectory.filter(
+    (s) => s.role.includes('Dean') && s.role !== 'Dean of Students'
+  );
+
+  // HODs
+  const heads = staffDirectory.filter(
+    (s) => s.role.startsWith('HOD') || s.role.includes('Head of')
+  );
+
+  // Coordinators, Directors, Principals
+  const coordinators = staffDirectory.filter(
+    (s) =>
+      (s.role.includes('Coordinator') ||
+        s.role.startsWith('Director') ||
+        s.role.includes('Principal')) &&
+      !executiveNames.has(s.name)
+  );
+
+  // --- Card renderer (real data only) ---
+  const renderCard = (member: any, featured = false) => (
+    <div
+      key={member.name}
+      style={{
+        background: featured ? '#2d1454' : '#fff',
+        color: featured ? '#fff' : '#2d1454',
+        borderRadius: '16px',
+        padding: '24px',
+        border: featured ? 'none' : '1px solid #e0d4ee',
+        boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        minHeight: '100%',
+      }}
+    >
+      <div
+        style={{
+          width: '72px',
+          height: '72px',
+          borderRadius: '50%',
+          background: featured ? 'rgba(255,255,255,0.15)' : '#f0e8fa',
+          color: featured ? '#fff' : '#3d1a6b',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          fontSize: '24px',
+          fontWeight: 800,
+          marginBottom: '16px',
+        }}
+      >
+        {member.name
+          .split(' ')
+          .filter((n: string) => n.length > 0 && !n.includes('.'))
+          .map((n: string) => n[0])
+          .join('')
+          .slice(0, 2)}
+      </div>
+      <h3 style={{ fontSize: '16px', margin: '0 0 6px', fontWeight: 700, lineHeight: 1.3 }}>
+        {member.name}
+      </h3>
+      <p style={{ fontSize: '12px', color: featured ? '#c4b5fd' : '#8a7fa0', margin: '0 0 8px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: 1.4 }}>
+        {member.role}
+      </p>
+      <p style={{ fontSize: '11px', color: featured ? '#a78bfa' : '#5a4b6b', margin: 'auto 0 0', fontWeight: 500 }}>
+        {member.dept}
+      </p>
+    </div>
+  );
+
+  // --- Section renderer ---
+  const renderSection = (title: string, subtitle: string, members: any[], columns = 4) => {
+    if (members.length === 0) return null;
+    return (
+      <div style={{ marginBottom: '64px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+          <h2 style={{ fontSize: '28px', color: '#2d1454', margin: '0 0 8px', fontFamily: "'Playfair Display', serif" }}>
+            {title}
+          </h2>
+          <p style={{ color: '#5a4b6b', fontSize: '15px', maxWidth: '640px', margin: '0 auto', lineHeight: 1.6 }}>
+            {subtitle}
+          </p>
+          <p style={{ color: '#8a7fa0', fontSize: '12px', marginTop: '8px' }}>
+            {members.length} {members.length === 1 ? 'member' : 'members'}
+          </p>
+        </div>
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(auto-fill, minmax(${columns === 4 ? '240px' : '260px'}, 1fr))`,
+            gap: '20px',
+          }}
+        >
+          {members.map((m, i) => renderCard(m, i === 0 && columns === 4))}
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div style={{ background: '#f9f6fd', minHeight: '100vh', paddingBottom: '60px' }}>
+      <SubPageHero
+        images={pageImages.about}
+        eyebrow="About AVIU"
+        title={<>Leadership &amp; <em>Governance</em></>}
+        subtitle="Our leadership team is appointed in accordance with the Universities and Other Tertiary Institutions Act, guided by NCHE standards. Every name below is drawn from the official AVIU 5th Graduation Book 2026."
+        crumbs={[
+          { label: 'Home', path: '/' },
+          { label: 'About', path: '/about' },
+          { label: 'Leadership', path: '/about/leadership' },
+        ]}
+      />
+
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '60px 20px' }}>
+
+        {/* INTRO */}
+        <div style={{ textAlign: 'center', marginBottom: '56px', maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto' }}>
+          <p style={{ color: '#3d1a6b', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1.5px', marginBottom: '8px' }}>
+            Governance
+          </p>
+          <h2 style={{ fontSize: '32px', color: '#2d1454', margin: '0 0 12px', fontFamily: "'Playfair Display', serif" }}>
+            The people steering AVIU
+          </h2>
+          <p style={{ color: '#5a4b6b', fontSize: '16px', lineHeight: 1.7 }}>
+            AVIU's governance brings together the Chancellor, University Council, Board of Directors, Senate, and Faculty leadership — all working to uphold academic excellence, transparency, and student success.
+          </p>
+        </div>
+
+        {/* 1. EXECUTIVE LEADERSHIP */}
+        {renderSection(
+          'Executive Leadership',
+          'Chancellor, Vice Chancellor, Council and Board chairs, and the University Secretary. Appointed by Council and the Board of Directors.',
+          executive
+        )}
+
+        {/* 2. FACULTY DEANS */}
+        {renderSection(
+          'Faculty Deans',
+          'Senior academics responsible for curriculum, research and academic quality within each faculty.',
+          deans
+        )}
+
+        {/* 3. HEADS OF DEPARTMENT */}
+        {renderSection(
+          'Heads of Department',
+          'Academic leaders managing teaching, research and student support in their departments.',
+          heads
+        )}
+
+        {/* 4. COORDINATORS & DIRECTORS */}
+        {renderSection(
+          'Coordinators & Directors',
+          'Coordinators and directors leading specific programmes, units and services.',
+          coordinators
+        )}
+
+        {/* 5. ADMINISTRATIVE STAFF */}
+        {renderSection(
+          'Administrative Leadership',
+          'Registrar, Finance, Quality Assurance and student affairs offices supporting University operations.',
+          administrative
+        )}
+
+        {/* SOURCE NOTE */}
+        <div style={{ background: '#fff', borderRadius: '12px', padding: '20px', border: '1px solid #e0d4ee', textAlign: 'center', fontSize: '13px', color: '#5a4b6b', lineHeight: 1.7 }}>
+          <strong style={{ color: '#2d1454' }}>Source:</strong> AVIU 5th Graduation Book 2026 (pages 3, 5, 14-20). For updates or corrections, contact the University Secretary's office at{' '}
+          <a href="mailto:info@aviu.ac.ug" style={{ color: '#3d1a6b', fontWeight: 600 }}>info@aviu.ac.ug</a>.
+        </div>
+
+      </div>
+    </div>
+  );
+}

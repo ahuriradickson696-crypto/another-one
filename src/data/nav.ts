@@ -5,15 +5,22 @@ export type NavGroup = {
 
 export const navGroups: NavGroup[] = [
   {
-    label: 'Programs',
+    label: 'About',
     items: [
-      { label: 'All Programs', path: '/programs' },
-      { label: 'Undergraduate', path: '/programs/undergraduate' },
-      { label: 'Postgraduate & Doctoral', path: '/programs/postgraduate' },
-      { label: 'Online & Flexible', path: '/programs/online' },
-      { label: 'International Study', path: '/programs/international' },
-      { label: 'Course Finder', path: '/programs/course-finder' },
-      { label: 'Fees & Payment', path: '/fees' },
+      { label: 'About AVIU', path: '/about' },
+      { label: 'University Anthem', path: '/about/anthem' },
+      { label: 'Programmes', path: '/programmes' },
+      { label: 'Staff', path: '/staff' },
+      { label: 'Graduation 2026', path: '/graduation' },
+      { label: 'Leadership & Governance', path: '/about/leadership' },
+      { label: 'University Organisation', path: '/about/organisation' },
+      { label: 'Policy & Legal Framework', path: '/about/policies' },
+      { label: 'Annual Reports', path: '/about/annual-reports' },
+      { label: 'Campus & Visitor Info', path: '/about/campus' },
+      { label: 'Alumni & Donors', path: '/about/alumni' },
+      { label: 'Careers / Jobs', path: '/about/careers' },
+      { label: 'Offices & Directorates', path: '/offices' },
+      { label: 'Staff Directory', path: '/staff' },
     ],
   },
   {
@@ -28,6 +35,18 @@ export const navGroups: NavGroup[] = [
       { label: 'Scholarships & Financial Aid', path: '/admissions/scholarships' },
       { label: 'Campus Visits & Open Days', path: '/admissions/campus-visits' },
       { label: 'Downloads & Forms', path: '/downloads' },
+    ],
+  },
+  {
+    label: 'Programs',
+    items: [
+      { label: 'All Programs', path: '/programmes' },
+      { label: 'Undergraduate', path: '/study/undergraduate' },
+      { label: 'Postgraduate & Doctoral', path: '/study/postgraduate' },
+      { label: 'Online & Flexible', path: '/study/online' },
+      { label: 'International Study', path: '/study/international' },
+      { label: 'Course Finder', path: '/study/course-finder' },
+      { label: 'Fees & Payment', path: '/fees' },
     ],
   },
   {
@@ -59,21 +78,6 @@ export const navGroups: NavGroup[] = [
     ],
   },
   {
-    label: 'About',
-    items: [
-      { label: 'About AVIU', path: '/about' },
-      { label: 'Leadership & Governance', path: '/about/leadership' },
-      { label: 'University Organisation', path: '/about/organisation' },
-      { label: 'Policy & Legal Framework', path: '/about/policies' },
-      { label: 'Annual Reports', path: '/about/annual-reports' },
-      { label: 'Campus & Visitor Info', path: '/about/campus' },
-      { label: 'Alumni & Donors', path: '/about/alumni' },
-      { label: 'Careers / Jobs', path: '/about/careers' },
-      { label: 'Offices & Directorates', path: '/offices' },
-      { label: 'Staff Directory', path: '/staff' },
-    ],
-  },
-  {
     label: 'Contact',
     items: [
       { label: 'Contact Us', path: '/contact' },
@@ -84,3 +88,4 @@ export const navGroups: NavGroup[] = [
     ],
   },
 ];
+

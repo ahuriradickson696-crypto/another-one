@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head><title>Typography Probe</title></head>
+<body>
+<h1>Please open the browser console</h1>
+<p>Follow these steps:</p>
+<ol>
+  <li>Open http://localhost:5173 in a new tab</li>
+  <li>Press F12 (DevTools)</li>
+  <li>Paste this in the Console tab and press Enter:</li>
+</ol>
+<pre style="background:#eee;padding:12px;border-radius:6px;overflow:auto">
+const s = (sel) => {
+  const el = document.querySelector(sel);
+  if (!el) return 'NOT FOUND';
+  const cs = getComputedStyle(el);
+  return cs.fontSize + ' / line-height: ' + cs.lineHeight;
+};
+console.table({
+  'Body text':         s('body'),
+  'Paragraph (p)':     s('p'),
+  'H1 (hero)':         s('h1'),
+  'H2 (section)':      s('h2'),
+  'H3 (card)':         s('h3'),
+  'Nav link':          s('.main-nav a, .nav-group > a'),
+  'Footer link':       s('footer a'),
+  'Small text (.eyebrow)': s('.eyebrow'),
+  'Button':            s('button'),
+});
+</pre>
+<p>Then screenshot or copy the table and paste it back.</p>
+</body>
+</html>

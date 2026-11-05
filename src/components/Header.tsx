@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Menu, X, Search, ChevronDown, Compass } from 'lucide-react';
 import { universityInfo } from '@/data/university';
 import { navGroups, type NavGroup } from '@/data/nav';
@@ -69,7 +69,7 @@ export function Header() {
     <>
       <div className="top-meta-bar">
         <LiveClock />
-        <button type="button" className="top-meta-apply" onClick={openApply}>Apply now</button>
+        <button type="button" className="top-meta-apply" onClick={() => openApply()}>Apply now</button>
       </div>
       <div className="notice-bar" role="region" aria-label="Notices">
         <div className="notice-bar-inner">
@@ -172,7 +172,7 @@ export function Header() {
             <Search size={19} />
           </button>
           
-          <button type="button" className="nav-apply" onClick={openApply}
+          <button type="button" className="nav-apply" onClick={() => openApply()}
             href="https://elearning.aviu.ac.ug/"
             target="_blank"
             rel="noopener noreferrer"

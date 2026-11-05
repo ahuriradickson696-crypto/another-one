@@ -1,8 +1,9 @@
-﻿import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { RouterProvider, useRouter } from '@/router/Router';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { ApplyProvider } from '@/components/ApplyContext';
+import { FloatingApplyButton } from '@/components/FloatingApplyButton';
 import { FloatingVideoBox } from '@/components/FloatingVideoBox';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { WelcomeSplash } from '@/components/WelcomeSplash'
@@ -17,6 +18,8 @@ const Admissions = lazy(() => import('@/pages/Admissions').then((m) => ({ defaul
 const Research = lazy(() => import('@/pages/Research').then((m) => ({ default: m.Research })));
 const StudentLife = lazy(() => import('@/pages/StudentLife').then((m) => ({ default: m.StudentLife })));
 const Staff = lazy(() => import('@/pages/Staff').then((m) => ({ default: m.Staff })));
+const Programmes = lazy(() => import('@/pages/Programmes').then((m) => ({ default: m.Programmes })));
+const Graduation = lazy(() => import('@/pages/Graduation').then((m) => ({ default: m.Graduation })));
 const Library = lazy(() => import('@/pages/Library').then((m) => ({ default: m.Library })));
 const Fees = lazy(() => import('@/pages/Fees').then((m) => ({ default: m.Fees })));
 const About = lazy(() => import('@/pages/About').then((m) => ({ default: m.About })));
@@ -110,8 +113,9 @@ function Routes() {
     if (article) return <NewsArticle id={article[1]} />;
     switch (path) {
       case '/programs':
+      case '/programs/undergraduate':
       case '/study':
-        return <Study />;
+        return <UndergraduateStudy />;
       case '/study/undergraduate':
         return <UndergraduateStudy />;
       case '/programs/postgraduate':
@@ -291,6 +295,10 @@ function Routes() {
 
       case '/':
         return <Home />;
+      case '/programmes':
+        return <Programmes />;
+      case '/graduation':
+        return <Graduation />;
       default:
         return <NotFound />;
     }
@@ -334,6 +342,7 @@ function App() {
   return (
     <RouterProvider>
       <ApplyProvider>
+        <FloatingApplyButton />
         <FloatingVideoBox />
         
         <Routes />
@@ -343,6 +352,11 @@ function App() {
 }
 
 export default App;
+
+
+
+
+
 
 
 

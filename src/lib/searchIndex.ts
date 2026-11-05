@@ -27,7 +27,7 @@ const synonyms: Record<string, string> = {
   '/academic-calendar': 'term dates semester intake calendar',
   '/admissions/scholarships': 'bursary financial aid funding sponsorship',
   '/student-life/graduation-lists': 'graduation graduate ceremony',
-  '/programs/course-finder': 'course degree diploma certificate find',
+  '/study/course-finder': 'course degree diploma certificate find',
   '/student-life/timetables': 'timetable schedule lectures',
   '/research/phd-opportunities': 'doctorate doctoral phd',
 };
@@ -53,7 +53,7 @@ for (const s of staffMembers) add(s.name, s.role, '/staff', s.qualification);
 
 export const popularSearches: SearchEntry[] = [
   ['How to apply', 'Admissions', '/admissions/how-to-apply'],
-  ['Programmes', 'Study', '/programs'],
+  ['Programmes', 'Study', '/programmes'],
   ['Fees & payment', 'Costs', '/fees'],
   ['Academic calendar', 'Dates', '/academic-calendar'],
   ['Contact us', 'Get in touch', '/contact'],

@@ -1,4 +1,4 @@
-﻿import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useApply } from '@/components/ApplyContext';
 
 export function FloatingApplyButton() {
@@ -6,7 +6,7 @@ export function FloatingApplyButton() {
 
   return (
     <button
-      onClick={openApply}
+      onClick={() => openApply()}
       aria-label="Open Application Form"
       style={{
         position: 'fixed',

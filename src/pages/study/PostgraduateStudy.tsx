@@ -22,7 +22,7 @@ export function PostgraduateStudy() {
         eyebrow="Degree level"
         title={<>Postgraduate &amp; <em>Doctoral Study</em></>}
         subtitle="Advance your career and contribute to cutting-edge research with our master's, doctoral, and postgraduate diploma programmes. Designed for working professionals and aspiring researchers alike."
-        crumbs={[{ label: 'Home', path: '/' }, { label: 'Programs', path: '/programs' }, { label: 'Postgraduate', path: '/programs/postgraduate' }]}
+        crumbs={[{ label: 'Home', path: '/' }, { label: 'Programs', path: '/programmes' }, { label: 'Postgraduate', path: '/study/postgraduate' }]}
       />
 
       <section className="section-pad">
@@ -122,7 +122,7 @@ export function PostgraduateStudy() {
           <h2>Apply for postgraduate study.</h2>
           <p>Contact the academic registrar to start your postgraduate application.</p>
         </div>
-        <button className="button button-light" onClick={openApply}>Apply now <ArrowRight size={17} /></button>
+        <button className="button button-light" onClick={() => openApply()}>Apply now <ArrowRight size={17} /></button>
       </section>
     </div>
   );

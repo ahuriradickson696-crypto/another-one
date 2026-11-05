@@ -1,0 +1,65 @@
+﻿import { useState } from 'react';
+import { Search, Users } from 'lucide-react';
+import { staffData } from '@/data/staff';
+
+export function Staff() {
+  const [search, setSearch] = useState('');
+  const [deptFilter, setDeptFilter] = useState('All');
+
+  const filteredStaff = staffData.filter(s => {
+    const matchesSearch = s.name.toLowerCase().includes(search.toLowerCase()) || s.title.toLowerCase().includes(search.toLowerCase());
+    const matchesDept = deptFilter === 'All' || s.department === deptFilter;
+    return matchesSearch && matchesDept;
+  });
+
+  const departments = ['All', 'Management', 'Education', 'Business & ICT', 'Health Sciences', 'Engineering', 'Law', 'Support'];
+
+  return (
+    <div className="page-content" style={{ background: '#f9f6fd', paddingBottom: '80px' }}>
+      <section className="section-pad" style={{ background: '#2d1454', color: '#fff', padding: '80px 20px', textAlign: 'center' }}>
+        <h1 style={{ fontSize: 'clamp(32px, 5vw, 48px)', fontFamily: "'Playfair Display', serif", margin: 0 }}>Our Staff</h1>
+        <p style={{ opacity: 0.8, marginTop: 12, fontSize: 18 }}>The academic and administrative team of AVIU.</p>
+      </section>
+
+      <section style={{ maxWidth: '1100px', margin: '40px auto 0', padding: '0 20px' }}>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', marginBottom: '24px', justifyContent: 'center' }}>
+          <div style={{ position: 'relative', width: '100%', maxWidth: '400px' }}>
+            <Search size={18} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: '#8a7fa0' }} />
+            <input type="text" placeholder="Search by name or title..." value={search} onChange={(e) => setSearch(e.target.value)} style={{ width: '100%', padding: '12px 16px 12px 42px', borderRadius: '8px', border: '1px solid #e0d4ee', outline: 'none' }} />
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', justifyContent: 'center', marginBottom: '30px' }}>
+          {departments.map(d => (
+            <button key={d} onClick={() => setDeptFilter(d)} style={{ padding: '8px 16px', borderRadius: '999px', border: 'none', cursor: 'pointer', fontSize: '13px', fontWeight: 600, background: deptFilter === d ? '#3d1a6b' : '#fff', color: deptFilter === d ? '#fff' : '#3d1a6b', boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>{d}</button>
+          ))}
+        </div>
+
+        <div style={{ textAlign: 'center', marginBottom: '30px', color: '#8a7fa0' }}>
+          Showing {filteredStaff.length} of {staffData.length} staff members
+        </div>
+
+        <div style={{ background: '#fff', borderRadius: '16px', overflow: 'hidden', boxShadow: '0 10px 30px rgba(0,0,0,0.05)' }}>
+          {filteredStaff.length === 0 ? (
+            <div style={{ padding: '40px', textAlign: 'center', color: '#8a7fa0' }}>No results found</div>
+          ) : (
+            <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
+              <thead style={{ background: '#3d1a6b', color: '#fff' }}>
+                <tr><th style={{ padding: '16px' }}>Name</th><th style={{ padding: '16px' }}>Title</th><th style={{ padding: '16px' }}>Department</th></tr>
+              </thead>
+              <tbody>
+                {filteredStaff.map((s, i) => (
+                  <tr key={i} style={{ borderBottom: '1px solid #f0e8fa', background: i % 2 === 0 ? '#fff' : '#f9f6fd' }}>
+                    <td style={{ padding: '16px', fontWeight: 600, color: '#2d1454' }}>{s.name}</td>
+                    <td style={{ padding: '16px', color: '#5a4b6b' }}>{s.title}</td>
+                    <td style={{ padding: '16px', color: '#5a4b6b' }}>{s.department}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}

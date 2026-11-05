@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Mail, Phone, MapPin, ArrowRight, Check, Clock, Globe2 } from 'lucide-react';
 import { universityInfo } from '@/data/university';
 import { PageHero } from '@/components/PageHero';
@@ -99,7 +99,7 @@ export function Contact() {
             <p>Our campus is at Nabweru in Wakiso District, just outside Kampala, Uganda.</p>
             <p>To schedule a campus visit, contact us or call our admissions office directly.</p>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
-              <button className="button button-primary" onClick={openApply}>Apply to AVIU <ArrowRight size={17} /></button>
+              <button className="button button-primary" onClick={() => openApply()}>Apply to AVIU <ArrowRight size={17} /></button>
               <a className="button button-outline" href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Avance International University, Nabweru, Wakiso, Uganda')}`} target="_blank" rel="noopener noreferrer"><MapPin size={16} /> Get directions</a>
             </div>
           </div>

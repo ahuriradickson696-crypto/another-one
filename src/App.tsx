@@ -1,4 +1,4 @@
-﻿import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { RouterProvider, useRouter } from '@/router/Router';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -18,6 +18,9 @@ const Admissions = lazy(() => import('@/pages/Admissions').then((m) => ({ defaul
 const Research = lazy(() => import('@/pages/Research').then((m) => ({ default: m.Research })));
 const StudentLife = lazy(() => import('@/pages/StudentLife').then((m) => ({ default: m.StudentLife })));
 const Staff = lazy(() => import('@/pages/Staff').then((m) => ({ default: m.Staff })));
+const Programmes = lazy(() => import('@/pages/Programmes').then((m) => ({ default: m.Programmes })));
+const Anthem = lazy(() => import('@/pages/Anthem').then((m) => ({ default: m.Anthem })));
+const Graduation = lazy(() => import('@/pages/Graduation').then((m) => ({ default: m.Graduation })));
 const Library = lazy(() => import('@/pages/Library').then((m) => ({ default: m.Library })));
 const Fees = lazy(() => import('@/pages/Fees').then((m) => ({ default: m.Fees })));
 const About = lazy(() => import('@/pages/About').then((m) => ({ default: m.About })));
@@ -111,8 +114,9 @@ function Routes() {
     if (article) return <NewsArticle id={article[1]} />;
     switch (path) {
       case '/programs':
+      case '/programs/undergraduate':
       case '/study':
-        return <Study />;
+        return <UndergraduateStudy />;
       case '/study/undergraduate':
         return <UndergraduateStudy />;
       case '/programs/postgraduate':
@@ -292,6 +296,13 @@ function Routes() {
 
       case '/':
         return <Home />;
+      case '/programmes':
+        return <Programmes />;
+      case '/anthem':
+      case '/about/anthem':
+        return <Anthem />;
+      case '/graduation':
+        return <Graduation />;
       default:
         return <NotFound />;
     }
@@ -315,7 +326,7 @@ function Routes() {
       <MotionEffects />
       <Header />
       <main id="main-content" tabIndex={-1}>
-        <Suspense fallback={<div className="page-loading" role="status">Loadingâ€¦</div>}>
+        <Suspense fallback={<div className="page-loading" role="status">Loading…</div>}>
           {renderPage()}
         </Suspense>
       </main>
@@ -345,6 +356,8 @@ function App() {
 }
 
 export default App;
+
+
 
 
 

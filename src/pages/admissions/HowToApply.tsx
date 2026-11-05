@@ -1,4 +1,4 @@
-﻿import { ArrowRight, FileText, Upload, CreditCard, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, FileText, Upload, CreditCard, CheckCircle2 } from 'lucide-react';
 import { SubPageHero } from '@/components/SubPageHero';
 import { pageImages } from '@/data/pageImages';
 import { useApply } from '@/components/ApplyContext';
@@ -85,7 +85,7 @@ export function HowToApply() {
           {/* FIXED: Button is now AVIU Purple, not green, and opens the form */}
           <button
             type="button"
-            onClick={openApply}
+            onClick={() => openApply()}
             style={{
               backgroundColor: '#3d1a6b',
               color: '#fff',

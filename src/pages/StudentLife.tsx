@@ -175,7 +175,7 @@ export function StudentLife() {
           <h2>Experience it yourself.</h2>
           <p>Apply today and become part of the AVIU community.</p>
         </div>
-        <button className="button button-light" onClick={openApply}>
+        <button className="button button-light" onClick={() => openApply()}>
           Apply now <ArrowRight size={17} />
         </button>
       </section>
