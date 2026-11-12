@@ -1,103 +1,105 @@
-// src/data/programmes.ts
-// Source: Avance International University 5th Graduation Book 2026
-// (FINAL GRADUATION BOOK AVAS-6.pdf, pages 6-8 – Admissions Office list)
-// HARD REPLACEMENT — contains ONLY the 66 programmes from the PDF.
-
-export type ProgrammeLevel =
-  | "Graduate Degree"
-  | "Undergraduate Degree"
-  | "Undergraduate Diploma"
-  | "Health Sciences Certificate"
-  | "UBTEB Certificate";
-
+// AVIU programme catalogue with descriptions (international standard)
 export interface Programme {
   id: string;
   name: string;
-  level: ProgrammeLevel;
-  faculty: string;
+  level: string;
   duration: string;
-  description?: string;
+  school: string;
+  schoolName: string;
+  description: string;
+  isNew?: boolean;
 }
 
-const EDU    = "Education & Humanities";
-const BICT   = "Business & ICT";
-const HEALTH = "Health Sciences";
-const SOC    = "Social Sciences";
+export const SCHOOLS = [
+  { id: 'nursing-midwifery', name: 'School of Nursing and Midwifery', shortName: 'Nursing', description: 'Training compassionate nurses and midwives for Uganda and beyond.' },
+  { id: 'allied-health', name: 'School of Allied Health Sciences', shortName: 'Allied Health', description: 'Clinical medicine, pharmacy and laboratory science for community health.' },
+  { id: 'medicine', name: 'School of Medicine and Health Sciences', shortName: 'Medicine', description: 'Medical, pharmacy and laboratory degree programmes (upcoming).' },
+  { id: 'law', name: 'School of Law', shortName: 'Law', description: 'Professional legal education for the next generation of advocates.' },
+  { id: 'engineering', name: 'Faculty of Engineering and Innovations', shortName: 'Engineering', description: 'Electrical, civil and software engineering for national development.' },
+  { id: 'computing-it', name: 'Faculty of Computing and IT', shortName: 'Computing and IT', description: 'Information technology, computer science and innovation programmes.' },
+  { id: 'education-humanities', name: 'Faculty of Education and Humanities', shortName: 'Education and Humanities', description: 'Teacher education, social work and public administration.' },
+  { id: 'business-management', name: 'Faculty of Business and Management', shortName: 'Business and Management', description: 'Accounting, HR, procurement and business administration.' },
+  { id: 'vocational', name: 'School of Vocational Studies', shortName: 'Vocational', description: 'Practical, hands-on certificates and diplomas for skilled trades.' },
+  { id: 'graduate-studies', name: 'School of Graduate Studies', shortName: 'Graduate Studies', description: 'Masters and postgraduate diplomas for advanced professionals.' },
+];
 
 export const programmesData: Programme[] = [
-  // ── GRADUATE DEGREE (3) ──
-  { id: "msc-it",  name: "Master of Science in Information Technology", level: "Graduate Degree", faculty: BICT, duration: "2 years" },
-  { id: "pgd-epm", name: "Post Graduate Diploma in Education Planning & Management", level: "Graduate Degree", faculty: EDU, duration: "1 year" },
-  { id: "pgde",    name: "Post Graduate Diploma in Education", level: "Graduate Degree", faculty: EDU, duration: "1 year" },
-
-  // ── UNDERGRADUATE DEGREE (31) ──
-  { id: "bed",         name: "Bachelor of Education", level: "Undergraduate Degree", faculty: EDU, duration: "3 years" },
-  { id: "ba-ed",       name: "Bachelor of Arts with Education", level: "Undergraduate Degree", faculty: EDU, duration: "3 years" },
-  { id: "becd",        name: "Bachelor of Early Childhood Education", level: "Undergraduate Degree", faculty: EDU, duration: "3 years" },
-  { id: "bed-prim-d",  name: "Bachelor of Education Primary (Direct)", level: "Undergraduate Degree", faculty: EDU, duration: "3 years" },
-  { id: "bbs-ed",      name: "Bachelor of Business Studies with Education", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bsc-agri-ed", name: "Bachelor of Science in Agriculture with Education", level: "Undergraduate Degree", faculty: EDU, duration: "3 years" },
-  { id: "bba",         name: "Bachelor of Business Administration", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bba-af",      name: "Bachelor of Business in Accounting & Finance", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bhrm",        name: "Bachelor of Human Resource Management", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bplm",        name: "Bachelor of Procurement & Logistics Management", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bit",         name: "Bachelor of Information Technology", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bib",         name: "Bachelor of International Business", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bcs",         name: "Bachelor of Computer Science", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bari",        name: "Bachelor of Agricultural & Rural Innovations", level: "Undergraduate Degree", faculty: EDU, duration: "3 years" },
-  { id: "bsse",        name: "Bachelor of Science in Software Engineering", level: "Undergraduate Degree", faculty: BICT, duration: "4 years" },
-  { id: "bsw",         name: "Bachelor of Social Work", level: "Undergraduate Degree", faculty: SOC, duration: "3 years" },
-  { id: "bpam",        name: "Bachelor of Public Administration & Management", level: "Undergraduate Degree", faculty: SOC, duration: "3 years" },
-  { id: "bahtm",       name: "Bachelor of Arts in Hotel & Tourism Management", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "llb",         name: "Bachelor of Laws", level: "Undergraduate Degree", faculty: SOC, duration: "4 years" },
-  { id: "blpm",        name: "Bachelor of Land & Property Management", level: "Undergraduate Degree", faculty: SOC, duration: "3 years" },
-  { id: "bgcd",        name: "Bachelor of Graphics and Communication Design", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bndc",        name: "Bachelor of Networking and Data Communication", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "bns-d",       name: "Bachelor of Nursing Science (Direct)", level: "Undergraduate Degree", faculty: HEALTH, duration: "4 years" },
-  { id: "bns-e",       name: "Bachelor of Nursing Science (Extension)", level: "Undergraduate Degree", faculty: HEALTH, duration: "3 years" },
-  { id: "bms-e",       name: "Bachelor of Midwifery Science (Extension)", level: "Undergraduate Degree", faculty: HEALTH, duration: "3 years" },
-  { id: "bms-d",       name: "Bachelor of Midwifery Science (Direct)", level: "Undergraduate Degree", faculty: HEALTH, duration: "4 years" },
-  { id: "bsm",         name: "Bachelor of Science in Marketing", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "biad",        name: "Bachelor of Industrial Art & Design", level: "Undergraduate Degree", faculty: BICT, duration: "3 years" },
-  { id: "hec-bio",     name: "Higher Education Access Certificate (Biological)", level: "Undergraduate Degree", faculty: EDU, duration: "1 year" },
-  { id: "hec-phy",     name: "Higher Education Access Certificate (Physical)", level: "Undergraduate Degree", faculty: EDU, duration: "1 year" },
-  { id: "hec-hum",     name: "Higher Education Access Certificate (Humanities)", level: "Undergraduate Degree", faculty: EDU, duration: "1 year" },
-
-  // ── UNDERGRADUATE DIPLOMA (22) ──
-  { id: "dpam",       name: "Diploma in Public Administration & Management", level: "Undergraduate Diploma", faculty: SOC, duration: "2 years" },
-  { id: "dba",        name: "Diploma in Business Administration", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "daf",        name: "Diploma in Accounting & Finance", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "dswsa",      name: "Diploma in Social Work & Social Administration", level: "Undergraduate Diploma", faculty: SOC, duration: "2 years" },
-  { id: "dit",        name: "Diploma in Information Technology", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "des",        name: "Diploma in Education Secondary", level: "Undergraduate Diploma", faculty: EDU, duration: "2 years" },
-  { id: "dep",        name: "Diploma in Education Primary", level: "Undergraduate Diploma", faculty: EDU, duration: "2 years" },
-  { id: "decd",       name: "Diploma in Early Childhood", level: "Undergraduate Diploma", faculty: EDU, duration: "2 years" },
-  { id: "dthm",       name: "Diploma in Tourism & Hotel Management", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "dcmch",      name: "Diploma in Clinical Medicine & Community Health", level: "Undergraduate Diploma", faculty: HEALTH, duration: "3 years" },
-  { id: "dpharm",     name: "Diploma in Pharmacy", level: "Undergraduate Diploma", faculty: HEALTH, duration: "3 years" },
-  { id: "dlt",        name: "Diploma in Laboratory Technology", level: "Undergraduate Diploma", faculty: HEALTH, duration: "2 years" },
-  { id: "dplm",       name: "Diploma in Procurement & Logistics Management", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "dagri",      name: "Diploma in Agriculture", level: "Undergraduate Diploma", faculty: EDU, duration: "2 years" },
-  { id: "ndee",       name: "National Diploma in Electrical Engineering", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "nda",        name: "National Diploma in Architecture", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "ndce",       name: "National Diploma in Civil Engineering", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "diad",       name: "Diploma in Industrial Art & Design", level: "Undergraduate Diploma", faculty: BICT, duration: "2 years" },
-  { id: "dns-d",      name: "Diploma in Nursing Science – Direct", level: "Undergraduate Diploma", faculty: HEALTH, duration: "3 years" },
-  { id: "dns-e",      name: "Diploma in Nursing Science – Extension", level: "Undergraduate Diploma", faculty: HEALTH, duration: "2 years" },
-  { id: "dmw-e",      name: "Diploma in Midwifery – Extension", level: "Undergraduate Diploma", faculty: HEALTH, duration: "2 years" },
-  { id: "dmw-d",      name: "Diploma in Midwifery – Direct", level: "Undergraduate Diploma", faculty: HEALTH, duration: "3 years" },
-
-  // ── HEALTH SCIENCES CERTIFICATES (3) ──
-  { id: "cert-nursing",   name: "Certificate in Nursing", level: "Health Sciences Certificate", faculty: HEALTH, duration: "1 year" },
-  { id: "cert-midwifery", name: "Certificate in Midwifery", level: "Health Sciences Certificate", faculty: HEALTH, duration: "1 year" },
-  { id: "cecd",           name: "Certificate in Early Childhood Development", level: "Health Sciences Certificate", faculty: EDU, duration: "1 year" },
-
-  // ── UBTEB CERTIFICATE (7) ──
-  { id: "ncba",      name: "National Certificate in Business Administration", level: "UBTEB Certificate", faculty: BICT, duration: "2 years" },
-  { id: "nca",       name: "National Certificate in Accountancy", level: "UBTEB Certificate", faculty: BICT, duration: "2 years" },
-  { id: "ncagri",    name: "National Certificate in Agriculture", level: "UBTEB Certificate", faculty: EDU, duration: "2 years" },
-  { id: "ncsw",      name: "National Certificate in Social Work", level: "UBTEB Certificate", faculty: SOC, duration: "2 years" },
-  { id: "nctourism", name: "National Certificate in Tourism", level: "UBTEB Certificate", faculty: BICT, duration: "2 years" },
-  { id: "ncpa",      name: "National Certificate in Public Administration", level: "UBTEB Certificate", faculty: SOC, duration: "2 years" },
-  { id: "ncit",      name: "National Certificate in Information Technology", level: "UBTEB Certificate", faculty: BICT, duration: "2 years" },
+  { id: 'bns-direct', name: 'Bachelor of Nursing Science (Direct)', level: 'Bachelor', duration: '4 Years', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Full professional nursing degree with clinical rotations, simulation lab practice, community health and research methods. Prepares graduates for licensure as registered nurses.' },
+  { id: 'bns-completion', name: 'Bachelor of Nursing Science (Completion)', level: 'Bachelor', duration: '3 Years', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Upgrade pathway for diploma-holding nurses seeking a Bachelor qualification while continuing professional practice. Flexible scheduling for working nurses.' },
+  { id: 'bms-direct', name: 'Bachelor of Midwifery Science (Direct)', level: 'Bachelor', duration: '4 Years', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Full professional midwifery degree covering antenatal, delivery, postnatal and newborn care with hands-on clinical experience in partner hospitals.' },
+  { id: 'bms-completion', name: 'Bachelor of Midwifery Science (Completion)', level: 'Bachelor', duration: '3 Years', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Professional midwifery upgrade pathway for practicing midwives seeking degree qualification and advanced clinical practice skills.' },
+  { id: 'dns-direct', name: 'Diploma in Nursing Science (Direct)', level: 'Diploma', duration: '3 Years', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Entry-level nursing diploma providing foundational knowledge in patient care, anatomy, pharmacology and clinical practice. Leads to enrolled nursing licensure.' },
+  { id: 'dmw-direct', name: 'Diploma in Midwifery (Direct)', level: 'Diploma', duration: '18 Months', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Focused midwifery diploma for direct entrants. Trains skilled birth attendants for maternal and newborn health in Uganda.' },
+  { id: 'dns-ext', name: 'Diploma in Nursing (Extension)', level: 'Diploma', duration: '18 Months', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Extension programme for enrolled nurses to upgrade to diploma-level registered nursing practice with advanced clinical skills.' },
+  { id: 'dmw-ext', name: 'Diploma in Midwifery (Extension)', level: 'Diploma', duration: '2.5 Years', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Midwifery extension programme for practicing nurses seeking specialization in maternal and newborn care.' },
+  { id: 'cert-nursing', name: 'Certificate in Nursing', level: 'Certificate', duration: '2.5 Years', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Foundation certificate in nursing practice. Prepares students for entry-level patient care roles and further nursing education.' },
+  { id: 'cert-midwifery', name: 'Certificate in Midwifery', level: 'Certificate', duration: '2.5 Years', school: 'nursing-midwifery', schoolName: 'School of Nursing and Midwifery', description: 'Foundation certificate in midwifery practice. Trains community birth attendants and maternal health workers.' },
+  { id: 'dcmch', name: 'Diploma in Clinical Medicine and Community Health', level: 'Diploma', duration: '3 Years', school: 'allied-health', schoolName: 'School of Allied Health Sciences', description: 'Trains clinical officers for primary health care, diagnosis and treatment of common conditions. Includes community health placements and practical clinical rotations.' },
+  { id: 'dpharm', name: 'Diploma in Pharmacy', level: 'Diploma', duration: '3 Years', school: 'allied-health', schoolName: 'School of Allied Health Sciences', description: 'Trains pharmacy technicians for dispensing, pharmaceutical care and drug management. Prepares graduates for careers in hospitals, pharmacies and pharmaceutical supply chains.' },
+  { id: 'dmlt', name: 'Diploma in Medical Laboratory Technology', level: 'Diploma', duration: '3 Years', school: 'allied-health', schoolName: 'School of Allied Health Sciences', description: 'Trains laboratory technologists for diagnostic testing, sample analysis and medical laboratory management. Essential role in clinical diagnostics and disease monitoring.' },
+  { id: 'hec', name: 'Higher Education Access Certificate', level: 'HEC', duration: '1 Year', school: 'allied-health', schoolName: 'School of Allied Health Sciences', description: 'Pre-university access programme for students who need to strengthen qualifications before enrolling in degree or diploma programmes.' },
+  { id: 'mbchb', name: 'Bachelor of Medicine and Bachelor of Surgery (MBChB)', level: 'Bachelor', duration: '5 Years', school: 'medicine', schoolName: 'School of Medicine and Health Sciences', description: 'Full medical degree leading to licensure as a medical doctor. Comprehensive training in clinical medicine, surgery, community health and research. Upcoming programme.' },
+  { id: 'bpharm', name: 'Bachelor of Pharmacy', level: 'Bachelor', duration: '5 Years', school: 'medicine', schoolName: 'School of Medicine and Health Sciences', description: 'Professional pharmacy degree preparing graduates for pharmaceutical practice, drug development and clinical pharmacy. Upcoming programme.' },
+  { id: 'bmlt', name: 'Bachelor of Medical Laboratory Technology', level: 'Bachelor', duration: '4 Years', school: 'medicine', schoolName: 'School of Medicine and Health Sciences', description: 'Advanced degree in medical laboratory science covering diagnostics, quality assurance and laboratory management. Upcoming programme.' },
+  { id: 'llb', name: 'Bachelor of Laws (LLB)', level: 'Bachelor', duration: '4 Years', school: 'law', schoolName: 'School of Law', description: 'Professional legal education covering constitutional law, criminal law, commercial law and human rights. Prepares graduates for the bar and legal practice in Uganda and East Africa.' },
+  { id: 'cert-admin-law', name: 'Certificate in Administrative Law', level: 'Certificate', duration: '4 Months', school: 'law', schoolName: 'School of Law', description: 'Short professional certificate covering administrative law principles for civil servants, administrators and public sector professionals.' },
+  { id: 'bsc-ee', name: 'Bachelor of Science in Electrical Engineering', level: 'Bachelor', duration: '4 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Professional engineering degree covering circuits, power systems, renewable energy and electrical installations. Prepares graduates for engineering careers in energy, telecom and manufacturing.' },
+  { id: 'bsc-ce', name: 'Bachelor of Science in Civil Engineering', level: 'Bachelor', duration: '4 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Professional engineering degree covering structural design, construction, water systems and transport infrastructure. Prepares graduates for design and construction management.' },
+  { id: 'bse-eng', name: 'Bachelor of Software Engineering', level: 'Bachelor', duration: '4 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Professional software engineering degree covering design, development, testing and project management. Prepares graduates for software development and engineering leadership.' },
+  { id: 'ntd-eet', name: 'National Technician Diploma in Electrical and Electronics Technology', level: 'Diploma', duration: '2 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Technical diploma covering electrical installations, electronics, and maintenance. Hands-on skills for technician-level careers in electrical and electronics industries.' },
+  { id: 'ntd-bct', name: 'National Technician Diploma in Building Construction Technology', level: 'Diploma', duration: '2 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Technical diploma in building construction, surveying and site management. Prepares graduates for construction supervision and building technology careers.' },
+  { id: 'ntd-rb', name: 'National Technician Diploma in Road and Bridge Construction Technology', level: 'Diploma', duration: '2 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Technical diploma covering road design, bridge construction and infrastructure maintenance. Practical skills for infrastructure development careers.' },
+  { id: 'ntd-wi', name: 'National Technician Diploma in Water and Irrigation Technology', level: 'Diploma', duration: '2 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Technical diploma in water systems, irrigation and rural water management. Prepares graduates for water engineering and agricultural infrastructure careers.' },
+  { id: 'nc-eee', name: 'National Certificate in Electrical and Electronics Engineering', level: 'Certificate', duration: '2 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Foundational certificate in electrical and electronics engineering for entry-level technical roles.' },
+  { id: 'nc-bc-eng', name: 'National Certificate in Building Construction', level: 'Certificate', duration: '2 Years', school: 'engineering', schoolName: 'Faculty of Engineering and Innovations', description: 'Foundational certificate in building construction for entry-level construction and site work.' },
+  { id: 'bit', name: 'Bachelor of Information Technology', level: 'Bachelor', duration: '3 Years', school: 'computing-it', schoolName: 'Faculty of Computing and IT', description: 'Professional IT degree covering programming, networking, cybersecurity and database management. Prepares graduates for careers in IT support, systems administration and cybersecurity.' },
+  { id: 'bcs', name: 'Bachelor of Computer Science', level: 'Bachelor', duration: '3 Years', school: 'computing-it', schoolName: 'Faculty of Computing and IT', description: 'Computer science degree covering algorithms, software design, artificial intelligence and systems development. Prepares graduates for software engineering and computing research.' },
+  { id: 'bari', name: 'Bachelor of Agriculture and Rural Innovation', level: 'Bachelor', duration: '3 Years', school: 'computing-it', schoolName: 'Faculty of Computing and IT', description: 'Degree combining agricultural science with rural innovation, agribusiness and sustainable food systems. Prepares graduates for agricultural entrepreneurship and rural development.' },
+  { id: 'biad', name: 'Bachelor of Industrial Art and Design', level: 'Bachelor', duration: '3 Years', school: 'computing-it', schoolName: 'Faculty of Computing and IT', description: 'Creative degree combining industrial design, product development, visual communication and media production for the creative industries.' },
+  { id: 'dit', name: 'Diploma in Information Technology', level: 'Diploma', duration: '2 Years', school: 'computing-it', schoolName: 'Faculty of Computing and IT', description: 'Practical IT diploma covering programming, systems administration and network support. Prepares graduates for IT technician and support careers.' },
+  { id: 'diad', name: 'Diploma in Industrial Art', level: 'Diploma', duration: '2 Years', school: 'computing-it', schoolName: 'Faculty of Computing and IT', description: 'Practical diploma in industrial art and design covering craft, product design and applied arts for the creative sector.' },
+  { id: 'ba-ed', name: 'Bachelor of Arts with Education', level: 'Bachelor', duration: '3 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Prepares secondary school teachers with dual subject specialisation (History, Geography, Economics, English, Art and Design, Entrepreneurship, ICT) and professional education studies.' },
+  { id: 'bsc-ed', name: 'Bachelor of Science with Education', level: 'Bachelor', duration: '3 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Prepares secondary science teachers with strong subject knowledge (Mathematics, Economics, Entrepreneurship, ICT, Agriculture) and professional education studies.' },
+  { id: 'bed', name: 'Bachelor of Education (Primary and Secondary)', level: 'Bachelor', duration: '2 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Professional teacher education degree preparing graduates for primary or secondary teaching with curriculum, assessment and classroom management skills.' },
+  { id: 'becd', name: 'Bachelor of Early Childhood Education', level: 'Bachelor', duration: '2 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Professional degree for early childhood educators. Covers child development, play-based learning, family engagement and quality early years provision.' },
+  { id: 'bsw', name: 'Bachelor of Social Works', level: 'Bachelor', duration: '3 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Professional social work degree with casework, community practice, ethics and supervised field placements. Prepares graduates for social services and NGO careers.' },
+  { id: 'bpa', name: 'Bachelor of Public Administration', level: 'Bachelor', duration: '3 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Prepares graduates for public sector management, policy implementation, local government and public service ethics.' },
+  { id: 'bthm', name: 'Bachelor of Tourism and Hospitality Management', level: 'Bachelor', duration: '3 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Prepares graduates for tourism, hotels, events and destination management with practical industry exposure and hospitality skills.' },
+  { id: 'dsw', name: 'Diploma in Social Work', level: 'Diploma', duration: '2 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Practical social work diploma covering casework, community practice and social welfare for entry-level social services careers.' },
+  { id: 'dpa', name: 'Diploma in Public Administration', level: 'Diploma', duration: '2 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Practical diploma for public sector administration, policy implementation and local government careers.' },
+  { id: 'ded', name: 'Diploma in Education (Primary and Secondary)', level: 'Diploma', duration: '2 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Teacher education diploma preparing graduates for primary or secondary teaching with classroom practice and pedagogy.' },
+  { id: 'decd', name: 'Diploma in Early Childhood', level: 'Diploma', duration: '2 Years', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Professional education for early childhood practitioners covering child development, learning and care.' },
+  { id: 'cecd', name: 'Certificate in Early Childhood', level: 'Certificate', duration: '1 Year', school: 'education-humanities', schoolName: 'Faculty of Education and Humanities', description: 'Foundation certificate in early childhood care and development for classroom assistants and childcare workers.' },
+  { id: 'bba', name: 'Bachelor of Business Administration', level: 'Bachelor', duration: '3 Years', school: 'business-management', schoolName: 'Faculty of Business and Management', description: 'Broad management education covering marketing, HR, operations, strategy and entrepreneurship. Prepares graduates for leadership roles in private and public sectors.' },
+  { id: 'baf', name: 'Bachelor of Science in Accounting and Finance', level: 'Bachelor', duration: '3 Years', school: 'business-management', schoolName: 'Faculty of Business and Management', description: 'Prepares graduates for careers in accounting, auditing, financial management and professional accounting pathways with strong analytical skills.' },
+  { id: 'bplm', name: 'Bachelor of Procurement and Logistics Management', level: 'Bachelor', duration: '3 Years', school: 'business-management', schoolName: 'Faculty of Business and Management', description: 'Prepares graduates for careers in procurement, supply chain and logistics management with strong operational and analytical skills.' },
+  { id: 'bhrm', name: 'Bachelor of Human Resource Management', level: 'Bachelor', duration: '3 Years', school: 'business-management', schoolName: 'Faculty of Business and Management', description: 'Professional HR education covering recruitment, employee relations, performance and organisational development. Prepares graduates for HR leadership roles.' },
+  { id: 'bib', name: 'Bachelor of International Business', level: 'Bachelor', duration: '3 Years', school: 'business-management', schoolName: 'Faculty of Business and Management', description: 'Prepares graduates for international trade, global markets and cross-border business management with cultural and language awareness.' },
+  { id: 'blpm', name: 'Bachelor of Land and Property Management', level: 'Bachelor', duration: '3 Years', school: 'business-management', schoolName: 'Faculty of Business and Management', description: 'Prepares graduates for land administration, property valuation and real estate management careers in public and private sectors.' },
+  { id: 'bthm-bm', name: 'Bachelor of Tourism and Hospitality Management', level: 'Bachelor', duration: '3 Years', school: 'business-management', schoolName: 'Faculty of Business and Management', description: 'Prepares graduates for tourism, hotels, events and destination management with practical industry exposure and management skills.' },
+  { id: 'dba', name: 'Diploma in Business Administration', level: 'Diploma', duration: '2 Years', school: 'business-management', schoolName: 'Faculty of Business and Management', description: 'Practical business education covering management, marketing and entrepreneurship for entry-level business careers.' },
+  { id: 'ncbs', name: 'National Certificate in Business Studies', level: 'Certificate', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Practical business certificate covering bookkeeping, sales and small business management for entry-level business careers.' },
+  { id: 'ndce', name: 'National Diploma in Civil Engineering', level: 'Diploma', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Technical diploma in civil engineering for construction supervision and infrastructure maintenance careers.' },
+  { id: 'ndee', name: 'National Diploma in Electrical Engineering', level: 'Diploma', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Technical diploma in electrical engineering for installation, maintenance and repair careers.' },
+  { id: 'nc-bc', name: 'National Certificate in Building and Construction', level: 'Certificate', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Foundational construction certificate for site work, masonry and building trades.' },
+  { id: 'ncit', name: 'National Certificate in Information Technology', level: 'Certificate', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Foundational IT certificate covering computer use, networks and basic programming for entry-level IT careers.' },
+  { id: 'ncsw', name: 'National Certificate in Social Work', level: 'Certificate', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Foundational social work certificate for community support, welfare and social services roles.' },
+  { id: 'ncpa', name: 'National Certificate in Public Administration', level: 'Certificate', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Foundational public administration certificate for local government and civil service careers.' },
+  { id: 'nc-ei', name: 'National Certificate in Electrical Installation', level: 'Certificate', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Practical electrical installation certificate for domestic and industrial electrical work.' },
+  { id: 'nctourism', name: 'National Certificate in Tourism', level: 'Certificate', duration: '2 Years', school: 'vocational', schoolName: 'School of Vocational Studies', description: 'Practical tourism certificate covering tour operations, hospitality and travel services.' },
+  { id: 'mba', name: 'Masters in Business Administration (MBA)', level: 'Masters', duration: '2 Years', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Advanced business degree for professionals seeking leadership roles. Covers strategy, finance, marketing, operations and entrepreneurship.' },
+  { id: 'msc-it', name: 'Masters in Information Technology', level: 'Masters', duration: '2 Years', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Advanced IT degree covering systems, networks, data science and enterprise technology leadership for senior IT professionals.' },
+  { id: 'mpa', name: 'Masters in Public Administration', level: 'Masters', duration: '2 Years', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Advanced degree for public sector leaders. Covers policy analysis, public finance, governance and public service management.' },
+  { id: 'msc-me', name: 'Masters in Monitoring and Evaluation', level: 'Masters', duration: '2 Years', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Advanced degree for development professionals covering M&E frameworks, data collection, impact assessment and program evaluation.' },
+  { id: 'med', name: 'Masters in Education', level: 'Masters', duration: '2 Years', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Advanced education degree for teachers and school leaders covering curriculum, pedagogy, leadership and educational research.' },
+  { id: 'med-plan', name: 'Masters in Education Planning and Management', level: 'Masters', duration: '2 Years', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Specialized degree for education planners and administrators covering policy, finance, planning and institutional management.' },
+  { id: 'pgd-epm', name: 'Post Graduate Education Planning and Management', level: 'Postgraduate Diploma', duration: '1 Year', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Postgraduate diploma for education professionals seeking leadership roles in planning and management.' },
+  { id: 'pgd-med-ed', name: 'Post Graduate Medical Education', level: 'Postgraduate Diploma', duration: '1 Year', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Postgraduate diploma for medical professionals seeking teaching and academic careers in medical education.' },
+  { id: 'pgd-pa', name: 'Post Graduate Public Administration', level: 'Postgraduate Diploma', duration: '1 Year', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Postgraduate diploma for public servants and administrators covering public policy, governance and administration.' },
+  { id: 'pgd-me', name: 'Post Graduate Monitoring and Evaluation', level: 'Postgraduate Diploma', duration: '1 Year', school: 'graduate-studies', schoolName: 'School of Graduate Studies', description: 'Postgraduate diploma for development practitioners covering M&E frameworks, data analysis and impact assessment.' },
 ];
+
+export const PROGRAMME_GROUPS = SCHOOLS.map((school) => ({
+  ...school,
+  programmes: programmesData.filter((p) => p.school === school.id),
+}));

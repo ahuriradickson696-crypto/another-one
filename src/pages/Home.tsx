@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ArrowRight, Check, Calendar, Clock, MapPin } from 'lucide-react';
-import { faculties, homeStats, testimonials, universityInfo, newsItems, events, partners } from '@/data/university';
+import { faculties, testimonials, universityInfo, newsItems, events, partners } from '@/data/university';
 import { programmesData } from '@/data/programmes';
 import { staffDirectory } from '@/data/staffDirectory';
 import { useRouter } from '@/router/Router';
@@ -8,89 +8,80 @@ import { useApply } from '@/components/ApplyContext';
 import { BackgroundCarousel } from '@/components/BackgroundCarousel';
 import { pageImages } from '@/data/pageImages';
 import { MomentsStrip } from '@/components/MomentsStrip';
-import { CountUp } from '@/components/CountUp';
-import { FloatingParticles } from '@/components/FloatingParticles';
-import { SplitWords } from '@/components/SplitWords';
-import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { HeroSlideshow } from '@/components/HeroSlideshow';
-import { t, defaultLanguage, type LanguageCode } from '@/lib/i18n';
-import { CatalogImage } from '@/components/CatalogImage';
 import { LiveClock } from '@/components/LiveClock';
-import ViceChancellorMessage from "@/components/ViceChancellorMessage";
-import ChancellorMessage from "@/components/ChancellorMessage";
+import { useCountUp } from '@/hooks/useCountUp';
+import ViceChancellorMessage from '@/components/ViceChancellorMessage';
+import ChancellorMessage from '@/components/ChancellorMessage';
 
-const PURPLE_DARK = '#2d1454';
-const PURPLE_SOFT = '#c4b5fd';
 const WHITE = '#ffffff';
 
-const FACULTY_KEYS = [
-  { display: 'Education', key: 'Education & Humanities' },
-  { display: 'Business & ICT', key: 'Business & ICT' },
-  { display: 'Nursing', key: 'Health Sciences' },
-  { display: 'Social Sciences', key: 'Social Sciences' },
-];
-
-function countProgrammesForFaculty(facultyKey: string) {
-  return programmesData.filter(p => p.faculty === facultyKey).length;
+function AnimatedStatCard({ target, label, sub, delay }: { target: number; label: string; sub: string; delay: number }) {
+  const { value, ref } = useCountUp(target, 2000);
+  const { navigate } = useRouter();
+  return (
+    <div
+      ref={ref}
+      onClick={() => navigate('/staff')}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate('/staff'); }}
+      style={{
+        background: '#fff',
+        borderRadius: '16px',
+        padding: '24px',
+        border: '1px solid #e0d4ee',
+        textAlign: 'center',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.04)',
+        transition: 'transform 0.2s, box-shadow 0.2s',
+        cursor: 'pointer',
+        position: 'relative',
+      }}
+      onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 24px rgba(61,26,107,0.12)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 12px rgba(0,0,0,0.04)'; }}
+    >
+      <div style={{ fontSize: 'clamp(32px, 5vw, 42px)', fontWeight: 800, color: '#3d1a6b', lineHeight: 1, marginBottom: '8px', fontVariantNumeric: 'tabular-nums' }}>
+        {value}
+      </div>
+      <div style={{ fontSize: '13px', color: '#2d1454', fontWeight: 700, marginBottom: '2px' }}>{label}</div>
+      <div style={{ fontSize: '11px', color: '#8a7fa0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{sub}</div>
+      <div style={{ marginTop: '10px', fontSize: '11px', color: '#3d1a6b', fontWeight: 700, opacity: 0.7 }}>
+        View staff →
+      </div>
+    </div>
+  );
 }
+
 
 export function Home() {
   const { navigate } = useRouter();
   const { openApply } = useApply();
   const [testimonialIndex, setTestimonialIndex] = useState(0);
-  const [featuredFaculty, setFeaturedFaculty] = useState<string>('All');
-  const [lang, setLang] = useState<LanguageCode>(() => {
-    if (typeof window === 'undefined') return defaultLanguage;
-    try { return (localStorage.getItem('aviu-lang') as LanguageCode) || defaultLanguage; }
-    catch { return defaultLanguage; }
-  });
-
-  useEffect(() => {
-    document.documentElement.lang = lang;
-    try { localStorage.setItem('aviu-lang', lang); } catch { /* ignore */ }
-  }, [lang]);
-
   const latestNews = newsItems.slice(0, 3);
   const upcomingEvents = events.slice(0, 3);
 
   return (
     <div className="page-content">
-      {/* 1. HERO */}
+            {/* HERO */}
       <section style={{ position: 'relative', color: WHITE, padding: 'clamp(56px, 9vh, 110px) clamp(20px, 8vw, 140px)', minHeight: 'clamp(700px, 90vh, 850px)', flexDirection: 'column', justifyContent: 'center', display: 'flex', alignItems: 'center', isolation: 'isolate', overflow: 'hidden' }}>
         <HeroSlideshow />
-        <FloatingParticles count={14} />
-        <div style={{ position: "relative", zIndex: 2, maxWidth: "680px", width: "100%", display: "flex", flexDirection: "column", alignItems: "flex-start", textAlign: "left" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 10 }}>
-            <span style={{ width: 32, height: 2, background: "#c4b5fd" }}></span>
-            <span style={{ color: "#c4b5fd", fontSize: 12, letterSpacing: "0.18em", textTransform: "uppercase", fontWeight: 700 }}>
-              Est. 2016 · NCHE-accredited · Nabweru, Uganda
-            </span>
+        <div style={{ position: 'relative', zIndex: 2, maxWidth: '680px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
+            <span style={{ width: 32, height: 2, background: '#c4b5fd' }} />
+            <span style={{ color: '#c4b5fd', fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700 }}>Est. 2016 · NCHE-accredited · Nabweru, Uganda</span>
           </div>
-          <div style={{ color: "rgba(255,255,255,0.85)", fontSize: "0.9rem", marginBottom: 20, fontWeight: 500, letterSpacing: "0.02em" }}>
-            <LiveClock />
-          </div>
-          <h1 style={{ color: "#ffffff", fontSize: "clamp(2.1rem, 4.5vw, 3.3rem)", lineHeight: 1.1, letterSpacing: "-0.03em", fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 500, margin: "0 0 18px 0" }}>
-            Enhancing <em style={{ color: "#c4b5fd", fontStyle: "italic" }}>innovations</em>
-          </h1>
-          <p style={{ color: "rgba(255,255,255,0.92)", fontSize: "1.1rem", lineHeight: 1.65, maxWidth: 540, margin: "0 0 12px 0" }}>
-            At Avance International University we identify, analyse and focus on each student's strengths, shaping them to thrive in today's competitive world of work.
-          </p>
-          <p style={{ color: "rgba(255,255,255,0.75)", fontSize: "0.95rem", lineHeight: 1.6, maxWidth: 520, margin: "0 0 32px 0" }}>
-            Bachelor degrees in Education, Business & ICT, Nursing and Social Sciences.<br />
-            January · May · August intakes.
-          </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14 }}>
-            <button type="button" onClick={() => navigate("/study")} style={{ background: "#ffffff", color: "#2d1454", padding: "14px 26px", borderRadius: 8, fontWeight: 600, border: "none", cursor: "pointer", fontSize: "0.95rem" }}>
-              Find your programme
-            </button>
-            <button type="button" onClick={() => openApply()} style={{ background: "transparent", color: "#ffffff", padding: "14px 26px", borderRadius: 8, fontWeight: 600, border: "2px solid rgba(255,255,255,0.7)", cursor: "pointer", fontSize: "0.95rem" }}>
-              How to apply
-            </button>
+          <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', marginBottom: 20, fontWeight: 500 }}><LiveClock /></div>
+          <h1 style={{ color: '#ffffff', fontSize: 'clamp(2.1rem, 4.5vw, 3.3rem)', lineHeight: 1.1, letterSpacing: '-0.03em', fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 500, margin: '0 0 18px 0' }}>Enhancing <em style={{ color: '#c4b5fd', fontStyle: 'italic' }}>innovations</em></h1>
+          <p style={{ color: 'rgba(255,255,255,0.92)', fontSize: '1.1rem', lineHeight: 1.65, maxWidth: 540, margin: '0 0 12px 0' }}>At Avance International University we identify, analyse and focus on each student's strengths, shaping them to thrive in today's competitive world of work.</p>
+          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 520, margin: '0 0 32px 0' }}>Bachelor degrees in Education, Business & ICT, Nursing and Social Sciences.<br />January · May · August intakes.</p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
+            <button type="button" onClick={() => navigate('/programmes')} style={{ background: '#ffffff', color: '#2d1454', padding: '14px 26px', borderRadius: 8, fontWeight: 600, border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}>Find your programme</button>
+            <button type="button" onClick={() => openApply()} style={{ background: 'transparent', color: '#ffffff', padding: '14px 26px', borderRadius: 8, fontWeight: 600, border: '2px solid rgba(255,255,255,0.7)', cursor: 'pointer', fontSize: '0.95rem' }}>How to apply</button>
           </div>
         </div>
       </section>
 
-      {/* 2. WHY AVIU */}
+      {/* WHY AVIU */}
       <section className="features-section section-pad">
         <div className="section-heading centered">
           <div>
@@ -99,109 +90,85 @@ export function Home() {
           </div>
         </div>
         <div className="features-grid">
-          {[
-            'Accredited by the National Council for Higher Education (NCHE) — unche.or.ug',
-            'Hands-on, competence-based teaching with field attachments',
-            'Bachelor programmes across Education, Business & ICT, Nursing and Social Sciences',
-            'Technology-enhanced learning and e-learning platform',
-            'Research-oriented training across all programmes',
-            'Student engagement in start-ups, community and industry projects',
-            'Three main intakes per year: January, May and August',
-            'Merit scholarships and support options (details from Admissions)',
-            'Nabweru campus, Wakiso District — accessible from Kampala',
-          ].map((item, i) => (
-            <div className="feature-item" key={i}>
-              <Check size={18} />
-              <span>{item}</span>
-            </div>
+          {['Accredited by the National Council for Higher Education (NCHE) — unche.or.ug', 'Hands-on, competence-based teaching with field attachments', 'Bachelor programmes across Education, Business & ICT, Nursing and Social Sciences', 'Technology-enhanced learning and e-learning platform', 'Research-oriented training across all programmes', 'Student engagement in start-ups, community and industry projects', 'Three main intakes per year: January, May and August', 'Merit scholarships and support options (details from Admissions)', 'Nabweru campus, Wakiso District — accessible from Kampala'].map((item, i) => (
+            <div className="feature-item" key={i}><Check size={18} /><span>{item}</span></div>
           ))}
         </div>
       </section>
 
-      {/* 3. PROGRAMMES BY FACULTY */}
-      <section className="section-pad">
-        <div className="section-heading">
-          <div>
-            <div className="eyebrow"><span className="eyebrow-line" /> Explore your future</div>
-            <h2>Find your <em>direction.</em></h2>
-          </div>
-          <a className="text-link" onClick={(e) => { e.preventDefault(); navigate('/study'); }}>View all programmes <ArrowRight size={16} /></a>
-        </div>
-        <div className="school-grid">
-          {faculties.map(({ id, name, icon: Icon }, index) => {
-            const facultyKey = FACULTY_KEYS.find(f => name.toLowerCase().includes(f.display.toLowerCase()))?.key || '';
-            const count = facultyKey ? countProgrammesForFaculty(facultyKey) : 0;
-            return (
-              <a className="school-card" key={id} onClick={(e) => { e.preventDefault(); navigate('/study'); }}>
-                <span className="school-index">0{index + 1}</span>
-                <Icon size={24} strokeWidth={1.5} />
-                <strong>{name}</strong>
-                <span className="school-count">{count} programmes</span>
-                <ArrowRight className="school-arrow" size={19} />
-              </a>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* 4. FEATURED PROGRAMMES */}
+      {/* EXPLORE PROGRAMMES */}
       <section className="section-pad" style={{ background: '#fff' }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 20px' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px', marginBottom: '40px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: '20px', marginBottom: '32px' }}>
             <div>
               <p style={{ color: '#3d1a6b', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1.5px', margin: 0 }}>World-Class Education</p>
-              <h2 style={{ fontSize: '40px', color: '#2d1454', margin: '8px 0 12px', lineHeight: 1.2 }}>Explore our programmes</h2>
-              <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '600px', margin: 0, lineHeight: 1.6 }}>
-                {programmesData.length} NCHE-accredited programmes across 4 faculties. From Postgraduate Diplomas to Bachelors — each designed to prepare you for global impact.
-              </p>
+              <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: '#2d1454', margin: '8px 0 12px', lineHeight: 1.2, fontFamily: "'Playfair Display', serif" }}>Explore our programmes</h2>
+              <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '640px', margin: 0, lineHeight: 1.6 }}>{programmesData.length} NCHE-accredited programmes across all levels — from Certificates and Diplomas to Bachelors, Masters and Postgraduate Diplomas.</p>
             </div>
-            <a onClick={(e) => { e.preventDefault(); navigate('/programmes'); }} href="/programmes" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#3d1a6b', fontWeight: 700, fontSize: '15px', textDecoration: 'none', padding: '12px 20px', borderRadius: '8px', border: '2px solid #3d1a6b', cursor: 'pointer' }}>
-              Browse all {programmesData.length} <ArrowRight size={18} />
-            </a>
+            <a onClick={(e) => { e.preventDefault(); navigate('/programmes'); }} href="/programmes" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#3d1a6b', fontWeight: 700, fontSize: '15px', textDecoration: 'none', padding: '12px 20px', borderRadius: '8px', border: '2px solid #3d1a6b', cursor: 'pointer', whiteSpace: 'nowrap' }}>Browse all {programmesData.length} <ArrowRight size={18} /></a>
           </div>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '32px' }}>
-            {['All', 'Education', 'Business & ICT', 'Nursing', 'Social Sciences'].map((f) => (
-              <button key={f} onClick={() => setFeaturedFaculty(f)} style={{ padding: '8px 18px', borderRadius: '999px', border: 'none', cursor: 'pointer', fontSize: '13px', fontWeight: 600, background: featuredFaculty === f ? '#3d1a6b' : '#f0e8fa', color: featuredFaculty === f ? '#fff' : '#3d1a6b', transition: 'all 0.2s' }}>
-                {f}
-              </button>
+            {[{ label: 'Diploma', emoji: '📜' }, { label: 'Bachelor', emoji: '🎓' }, { label: 'Postgraduate Diploma', emoji: '📘' }, { label: 'Masters', emoji: '🎓' }, { label: 'Certificate', emoji: '🏅' }, { label: 'HEC', emoji: '📋' }].map(({ label, emoji }) => {
+              const count = programmesData.filter((p) => p.level === label).length;
+              if (count === 0) return null;
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => navigate('/programmes?level=' + encodeURIComponent(label))}
+                  style={{ padding: '10px 16px', borderRadius: '999px', background: '#f0e8fa', color: '#3d1a6b', fontSize: '13px', fontWeight: 700, border: 'none', cursor: 'pointer', transition: 'all 0.2s' }}
+                  onMouseEnter={(e) => { e.currentTarget.style.background = '#3d1a6b'; e.currentTarget.style.color = '#fff'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.background = '#f0e8fa'; e.currentTarget.style.color = '#3d1a6b'; }}
+                >
+                  {emoji} {label} <span style={{ opacity: 0.7, marginLeft: '4px' }}>({count})</span>
+                </button>
+              );
+            })}
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '20px' }}>
+            {programmesData.slice(0, 6).map((p) => (
+              <article key={p.id} style={{ background: '#f9f6fd', borderRadius: '14px', padding: '22px', border: '1px solid #e0d4ee', display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  <span style={{ background: '#3d1a6b', color: '#fff', padding: '4px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase' }}>{p.level}</span>
+                  <span style={{ background: '#fff', color: '#3d1a6b', padding: '4px 10px', borderRadius: '6px', fontSize: '11px', fontWeight: 600 }}>{p.schoolName}</span>
+                </div>
+                <h3 style={{ fontSize: '17px', color: '#2d1454', margin: 0, lineHeight: 1.35, fontWeight: 700 }}>{p.name}</h3>
+                <p style={{ fontSize: '14px', color: '#5a4b6b', margin: 0, lineHeight: 1.6, flexGrow: 1 }}>{p.description || 'Programme details available on request.'}</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '12px', borderTop: '1px solid #e0d4ee' }}>
+                  <span style={{ color: '#3d1a6b', fontSize: '13px', fontWeight: 700 }}>{p.duration}</span>
+                  <span style={{ color: '#8a7fa0', fontSize: '11px' }}>NCHE Accredited</span>
+                </div>
+                <button type="button" onClick={() => openApply(p.name)} style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '6px', background: '#3d1a6b', color: '#fff', border: 'none', borderRadius: '8px', padding: '10px 16px', fontSize: '14px', fontWeight: 600, cursor: 'pointer', width: '100%' }}>Apply for this programme <ArrowRight size={16} /></button>
+              </article>
             ))}
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '24px' }}>
-            {programmesData.filter(p => {
-                if (featuredFaculty === 'All') return true;
-                if (featuredFaculty === 'Education') return p.faculty === 'Education & Humanities';
-                if (featuredFaculty === 'Nursing') return p.faculty === 'Health Sciences';
-                return p.faculty === featuredFaculty;
-              }).slice(0, 6).map((p) => (
-                <div key={p.id} onClick={() => openApply(p.name)} style={{ background: '#f9f6fd', borderRadius: '16px', padding: '24px', border: '1px solid #e0d4ee', cursor: 'pointer', transition: 'all 0.3s', display: 'flex', flexDirection: 'column' }} onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-4px)'; e.currentTarget.style.boxShadow = '0 12px 24px rgba(61,26,107,0.12)'; }} onMouseLeave={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = 'none'; }}>
-                  <div style={{ display: 'flex', gap: '6px', fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '12px' }}>
-                    <span style={{ background: '#3d1a6b', color: '#fff', padding: '4px 10px', borderRadius: '6px' }}>{p.level}</span>
-                    <span style={{ background: '#fff', color: '#3d1a6b', padding: '4px 10px', borderRadius: '6px' }}>{p.faculty}</span>
-                  </div>
-                  <h3 style={{ fontSize: '18px', color: '#2d1454', margin: '0 0 10px', lineHeight: 1.3, fontWeight: 700 }}>{p.name}</h3>
-                  <p style={{ fontSize: '14px', color: '#5a4b6b', margin: '0 0 16px', lineHeight: 1.5, flexGrow: 1 }}>{p.description}</p>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '14px', borderTop: '1px solid #e0d4ee', fontSize: '13px' }}>
-                    <span style={{ color: '#3d1a6b', fontWeight: 700 }}>{p.duration}</span>
-                    <span style={{ color: '#8a7fa0', fontSize: '11px' }}>{p.lastAccreditation ?? 'NCHE Accredited'}</span>
-                  </div>
-                </div>
-              ))}
-          </div>
           <div style={{ textAlign: 'center', marginTop: '32px' }}>
-            <a onClick={(e) => { e.preventDefault(); navigate('/programmes'); }} href="/programmes" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#3d1a6b', fontWeight: 700, fontSize: '15px', textDecoration: 'none', cursor: 'pointer' }}>
-              See all {programmesData.length} programmes <ArrowRight size={16} />
-            </a>
+            <a onClick={(e) => { e.preventDefault(); navigate('/programmes'); }} href="/programmes" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#3d1a6b', fontWeight: 700, fontSize: '15px', textDecoration: 'none', cursor: 'pointer' }}>See all {programmesData.length} programmes <ArrowRight size={16} /></a>
           </div>
         </div>
       </section>
 
-      {/* 5. CHANCELLOR */}
-      <ChancellorMessage />
+      {/* OUR PEOPLE */}
+      <section style={{ background: '#f9f6fd', padding: 'clamp(60px, 8vh, 90px) 20px' }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+            <p style={{ color: '#3d1a6b', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1.5px', margin: '0 0 8px' }}>Our People</p>
+            <h2 style={{ fontSize: 'clamp(28px, 5vw, 40px)', color: '#2d1454', margin: '0 0 12px', fontFamily: "'Playfair Display', serif", lineHeight: 1.2 }}>A University Built by <em>Experts</em></h2>
+            <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '680px', margin: '0 auto', lineHeight: 1.7 }}>From the Chancellor's office to every faculty and department, AVIU is powered by {staffDirectory.length} dedicated professionals working together for our students.</p>
+          </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
+            <AnimatedStatCard target={staffDirectory.length} label="Total staff" sub="Academic · Admin · Support" delay={0} />
+            <AnimatedStatCard target={7} label="Departments" sub="Across every faculty" delay={150} />
+            <AnimatedStatCard target={staffDirectory.filter(s => s.role.includes('Dean') && s.role !== 'Dean of Students').length} label="Deans & Directors" sub="Leading each faculty" delay={300} />
+            <AnimatedStatCard target={staffDirectory.filter(s => s.role.startsWith('HOD') || s.role.includes('Head of')).length} label="Heads of Department" sub="Programme leadership" delay={450} />
+          </div>
+        </div>
+      </section>
 
-      {/* 6. VICE CHANCELLOR */}
+      <ChancellorMessage />
       <ViceChancellorMessage />
 
-      {/* 7. TESTIMONIAL */}
+      {/* TESTIMONIAL */}
       <section className="quote-section" id="campus-life">
         <div className="quote-image">
           <img key={testimonialIndex} src={testimonials[testimonialIndex]?.image || '/images/graduates-laughing.jpg'} alt={testimonials[testimonialIndex]?.name || 'Student'} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
@@ -224,12 +191,12 @@ export function Home() {
         </div>
       </section>
 
-      {/* 8. NEWS */}
+      {/* NEWS */}
       <section className="section-pad bg-alt">
         <div className="section-heading">
           <div>
             <div className="eyebrow"><span className="eyebrow-line" /> Latest news</div>
-            <h2>What&apos;s happening at <em>AVIU.</em></h2>
+            <h2>What's happening at <em>AVIU.</em></h2>
           </div>
           <a className="text-link" onClick={(e) => { e.preventDefault(); navigate('/news'); }}>All news <ArrowRight size={16} /></a>
         </div>
@@ -239,13 +206,12 @@ export function Home() {
               <div className="news-meta"><span className="news-category">{item.category}</span><span className="news-date"><Calendar size={12} /> {item.date}</span></div>
               <h3>{item.title}</h3>
               <p>{item.excerpt}</p>
-              <a className="text-link" href={'/news/' + item.id} onClick={(e) => { e.preventDefault(); e.stopPropagation(); navigate('/news/' + item.id); }}>Read more <ArrowRight size={15} /></a>
             </article>
           ))}
         </div>
       </section>
 
-      {/* 9. EVENTS */}
+      {/* EVENTS */}
       <section className="section-pad">
         <div className="section-heading">
           <div>
@@ -269,64 +235,7 @@ export function Home() {
         </div>
       </section>
 
-      {/* 10. OUR PEOPLE */}
-      <section style={{ background: '#f9f6fd', padding: 'clamp(60px, 8vh, 90px) 20px' }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-          <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <p style={{ color: '#3d1a6b', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1.5px', margin: '0 0 8px' }}>Our People</p>
-            <h2 style={{ fontSize: 'clamp(28px, 5vw, 40px)', color: '#2d1454', margin: '0 0 12px', fontFamily: "'Playfair Display', serif", lineHeight: 1.2 }}>
-              A University Built by <em>Experts</em>
-            </h2>
-            <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '680px', margin: '0 auto', lineHeight: 1.7 }}>
-              From the Chancellor&apos;s office to every faculty and department, AVIU is powered by {staffDirectory.length} dedicated professionals — academics, clinicians, administrators and support staff — working together for our students.
-            </p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px', marginBottom: '40px' }}>
-            {[
-              { number: staffDirectory.length, label: 'Total staff', sub: 'Academic · Admin · Support' },
-              { number: 7, label: 'Departments', sub: 'Across every faculty' },
-              { number: staffDirectory.filter(s => s.role.includes('Dean') && s.role !== 'Dean of Students').length, label: 'Deans & Directors', sub: 'Leading each faculty' },
-              { number: staffDirectory.filter(s => s.role.startsWith('HOD') || s.role.includes('Head of')).length, label: 'Heads of Department', sub: 'Programme leadership' },
-            ].map((stat, i) => (
-              <div key={i} style={{ background: '#fff', borderRadius: '16px', padding: '24px', border: '1px solid #e0d4ee', textAlign: 'center', boxShadow: '0 4px 12px rgba(0,0,0,0.04)' }}>
-                <div style={{ fontSize: 'clamp(32px, 5vw, 42px)', fontWeight: 800, color: '#3d1a6b', lineHeight: 1, marginBottom: '8px' }}>{stat.number}</div>
-                <div style={{ fontSize: '13px', color: '#2d1454', fontWeight: 700, marginBottom: '2px' }}>{stat.label}</div>
-                <div style={{ fontSize: '11px', color: '#8a7fa0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{stat.sub}</div>
-              </div>
-            ))}
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '12px' }}>
-            {[
-              { dept: 'Education', icon: '📚' },
-              { dept: 'Business & ICT', icon: '💼' },
-              { dept: 'Health Sciences', icon: '🩺' },
-              { dept: 'Law', icon: '⚖️' },
-              { dept: 'Engineering', icon: '⚙️' },
-              { dept: 'Management', icon: '🏛️' },
-              { dept: 'Support', icon: '🤝' },
-            ].map(({ dept, icon }) => {
-              const count = staffDirectory.filter(s => (s.dept || '').trim().toLowerCase() === dept.toLowerCase()).length;
-              if (count === 0) return null;
-              return (
-                <div key={dept} style={{ background: '#fff', borderRadius: '12px', padding: '18px', border: '1px solid #e0d4ee', display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  <div style={{ fontSize: '28px', flexShrink: 0 }}>{icon}</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: '22px', fontWeight: 800, color: '#3d1a6b', lineHeight: 1 }}>{count}</div>
-                    <div style={{ fontSize: '12px', color: '#5a4b6b', fontWeight: 600, marginTop: '2px' }}>{dept} staff</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <div style={{ textAlign: 'center', marginTop: '40px' }}>
-            <button type="button" onClick={() => navigate('/staff')} style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#3d1a6b', fontWeight: 700, fontSize: '15px', background: 'transparent', border: '2px solid #3d1a6b', padding: '12px 24px', borderRadius: '8px', cursor: 'pointer' }}>
-              Meet the full AVIU team <ArrowRight size={16} />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* 11. PARTNERS */}
+      {/* PARTNERS */}
       <section className="section-pad bg-alt">
         <div className="section-heading centered">
           <div>
@@ -337,18 +246,15 @@ export function Home() {
         <div className="partners-grid">
           {partners.map((p) => (
             <div className="partner-card" key={p.name} title={p.name}>
-              {p.image && (
-                <img src={p.image} alt={p.name} loading="lazy" style={{ display: "block", maxHeight: "80px", maxWidth: "180px", width: "auto", height: "auto", objectFit: "contain", margin: "0 auto" }} />
-              )}
+              {p.image && <img src={p.image} alt={p.name} loading="lazy" style={{ display: 'block', maxHeight: '80px', maxWidth: '180px', objectFit: 'contain', margin: '0 auto' }} />}
             </div>
           ))}
         </div>
       </section>
 
-      {/* 12. MOMENTS */}
-      <MomentsStrip keys={["installationGroup","installationCake","partnership","celebrating","camStage","dignitaries"]} eyebrow="Moments at AVIU" title="Graduation and launch day" />
+      <MomentsStrip keys={['installationGroup', 'installationCake', 'partnership', 'celebrating', 'camStage', 'dignitaries']} eyebrow="Moments at AVIU" title="Graduation and launch day" />
 
-      {/* 13. FINAL CTA */}
+      {/* FINAL CTA */}
       <section className="cta-section">
         <div className="cta-inner">
           <div className="eyebrow"><span className="eyebrow-line" /> Your next chapter starts here</div>

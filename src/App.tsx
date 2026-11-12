@@ -19,6 +19,7 @@ const Research = lazy(() => import('@/pages/Research').then((m) => ({ default: m
 const StudentLife = lazy(() => import('@/pages/StudentLife').then((m) => ({ default: m.StudentLife })));
 const Staff = lazy(() => import('@/pages/Staff').then((m) => ({ default: m.Staff })));
 const Programmes = lazy(() => import('@/pages/Programmes').then((m) => ({ default: m.Programmes })));
+const SchoolProgrammes = lazy(() => import('@/pages/SchoolProgrammes').then((m) => ({ default: m.SchoolProgrammes })));
 const Anthem = lazy(() => import('@/pages/Anthem').then((m) => ({ default: m.Anthem })));
 const Graduation = lazy(() => import('@/pages/Graduation').then((m) => ({ default: m.Graduation })));
 const Library = lazy(() => import('@/pages/Library').then((m) => ({ default: m.Library })));
@@ -298,6 +299,8 @@ function Routes() {
         return <Home />;
       case '/programmes':
         return <Programmes />;
+      case path.startsWith('/programmes/') ? path : '/no-match':
+        return <SchoolProgrammes schoolId={path.replace('/programmes/', '')} />;
       case '/anthem':
       case '/about/anthem':
         return <Anthem />;
@@ -350,7 +353,7 @@ function App() {
         <FloatingVideoBox />
         
         <Routes />
-      </ApplyProvider>
+</ApplyProvider>
     </RouterProvider>
   );
 }

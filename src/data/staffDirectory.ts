@@ -1,4 +1,4 @@
-﻿export type StaffMember = { name: string; role: string; dept: string; };
+export type StaffMember = { name: string; role: string; dept: string; };
 
 export const staffDirectory: StaffMember[] = [
   // --- MANAGEMENT & ADMINISTRATIVE STAFF ---
@@ -60,7 +60,7 @@ export const staffDirectory: StaffMember[] = [
   { name: 'Mr. Kalema Emmanuel', role: 'Assistant Lecturer', dept: 'Education' },
   { name: 'Mr. Behangana David', role: 'Assistant Lecturer', dept: 'Education' },
   { name: 'Mr. Muriro Twaha', role: 'Assistant Lecturer', dept: 'Education' },
-  { name: 'Mr. Musinguzi Julius', role: 'Assistant Lecturer', dept: 'Education' },
+  { name: 'Mr. Musinguzi Julius Anthony', role: 'Assistant Lecturer', dept: 'Education' },
   { name: 'Mr. Ngumenawes Moses', role: 'Assistant Lecturer', dept: 'Education' },
   { name: 'Mr. SSebunya B. Kalungi', role: 'Assistant Lecturer', dept: 'Education' },
   { name: 'Mr. Mukwaya G. William', role: 'Assistant Lecturer', dept: 'Education' },
