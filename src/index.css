@@ -6150,3 +6150,19 @@ h3[style*="purple"] em,
 h3[style*="Purple"] em {
   color: #ffffff !important;
 }
+
+/* --- GLOBAL MIT-Style Typography --- */
+/* This forces every word on the site to use the MIT clean font */
+body, 
+h1, h2, h3, h4, h5, h6, 
+p, a, span, div, button, input, textarea, li {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Optional: Clean up headers to match MIT's sharp look */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+}

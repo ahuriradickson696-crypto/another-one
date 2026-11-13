@@ -1,6 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { RouterProvider, useRouter } from '@/router/Router';
 import { Header } from '@/components/Header';
+import { IntakePopup } from '@/components/IntakePopup';
 import { Footer } from '@/components/Footer';
 import { ApplyProvider } from '@/components/ApplyContext';
 import { FloatingApplyButton } from '@/components/FloatingApplyButton';
@@ -353,7 +354,8 @@ function App() {
         <FloatingVideoBox />
         
         <Routes />
-</ApplyProvider>
+  <IntakePopup />
+      </ApplyProvider>
     </RouterProvider>
   );
 }

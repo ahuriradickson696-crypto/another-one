@@ -46,7 +46,7 @@ function AnimatedStatCard({ target, label, sub, delay }: { target: number; label
       <div style={{ fontSize: '13px', color: '#2d1454', fontWeight: 700, marginBottom: '2px' }}>{label}</div>
       <div style={{ fontSize: '11px', color: '#8a7fa0', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{sub}</div>
       <div style={{ marginTop: '10px', fontSize: '11px', color: '#3d1a6b', fontWeight: 700, opacity: 0.7 }}>
-        View staff →
+        View staff â†’
       </div>
     </div>
   );
@@ -62,18 +62,18 @@ export function Home() {
 
   return (
     <div className="page-content">
-            {/* HERO */}
+{/* HERO */}
       <section style={{ position: 'relative', color: WHITE, padding: 'clamp(56px, 9vh, 110px) clamp(20px, 8vw, 140px)', minHeight: 'clamp(700px, 90vh, 850px)', flexDirection: 'column', justifyContent: 'center', display: 'flex', alignItems: 'center', isolation: 'isolate', overflow: 'hidden' }}>
         <HeroSlideshow />
         <div style={{ position: 'relative', zIndex: 2, maxWidth: '680px', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 10 }}>
             <span style={{ width: 32, height: 2, background: '#c4b5fd' }} />
-            <span style={{ color: '#c4b5fd', fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700 }}>Est. 2016 · NCHE-accredited · Nabweru, Uganda</span>
+            <span style={{ color: '#c4b5fd', fontSize: 12, letterSpacing: '0.18em', textTransform: 'uppercase', fontWeight: 700 }}>Est. 2016 Â· NCHE-accredited Â· Nabweru, Uganda</span>
           </div>
           <div style={{ color: 'rgba(255,255,255,0.85)', fontSize: '0.9rem', marginBottom: 20, fontWeight: 500 }}><LiveClock /></div>
           <h1 style={{ color: '#ffffff', fontSize: 'clamp(2.1rem, 4.5vw, 3.3rem)', lineHeight: 1.1, letterSpacing: '-0.03em', fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 500, margin: '0 0 18px 0' }}>Enhancing <em style={{ color: '#c4b5fd', fontStyle: 'italic' }}>innovations</em></h1>
           <p style={{ color: 'rgba(255,255,255,0.92)', fontSize: '1.1rem', lineHeight: 1.65, maxWidth: 540, margin: '0 0 12px 0' }}>At Avance International University we identify, analyse and focus on each student's strengths, shaping them to thrive in today's competitive world of work.</p>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 520, margin: '0 0 32px 0' }}>Bachelor degrees in Education, Business & ICT, Nursing and Social Sciences.<br />January · May · August intakes.</p>
+          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.95rem', lineHeight: 1.6, maxWidth: 520, margin: '0 0 32px 0' }}>Bachelor degrees in Education, Business & ICT, Nursing and Social Sciences.<br />January Â· May Â· August intakes.</p>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14 }}>
             <button type="button" onClick={() => navigate('/programmes')} style={{ background: '#ffffff', color: '#2d1454', padding: '14px 26px', borderRadius: 8, fontWeight: 600, border: 'none', cursor: 'pointer', fontSize: '0.95rem' }}>Find your programme</button>
             <button type="button" onClick={() => openApply()} style={{ background: 'transparent', color: '#ffffff', padding: '14px 26px', borderRadius: 8, fontWeight: 600, border: '2px solid rgba(255,255,255,0.7)', cursor: 'pointer', fontSize: '0.95rem' }}>How to apply</button>
@@ -90,7 +90,7 @@ export function Home() {
           </div>
         </div>
         <div className="features-grid">
-          {['Accredited by the National Council for Higher Education (NCHE) — unche.or.ug', 'Hands-on, competence-based teaching with field attachments', 'Bachelor programmes across Education, Business & ICT, Nursing and Social Sciences', 'Technology-enhanced learning and e-learning platform', 'Research-oriented training across all programmes', 'Student engagement in start-ups, community and industry projects', 'Three main intakes per year: January, May and August', 'Merit scholarships and support options (details from Admissions)', 'Nabweru campus, Wakiso District — accessible from Kampala'].map((item, i) => (
+          {['Accredited by the National Council for Higher Education (NCHE) â€” unche.or.ug', 'Hands-on, competence-based teaching with field attachments', 'Bachelor programmes across Education, Business & ICT, Nursing and Social Sciences', 'Technology-enhanced learning and e-learning platform', 'Research-oriented training across all programmes', 'Student engagement in start-ups, community and industry projects', 'Three main intakes per year: January, May and August', 'Merit scholarships and support options (details from Admissions)', 'Nabweru campus, Wakiso District â€” accessible from Kampala'].map((item, i) => (
             <div className="feature-item" key={i}><Check size={18} /><span>{item}</span></div>
           ))}
         </div>
@@ -103,12 +103,12 @@ export function Home() {
             <div>
               <p style={{ color: '#3d1a6b', fontWeight: 700, fontSize: '13px', textTransform: 'uppercase', letterSpacing: '1.5px', margin: 0 }}>World-Class Education</p>
               <h2 style={{ fontSize: 'clamp(28px, 4vw, 40px)', color: '#2d1454', margin: '8px 0 12px', lineHeight: 1.2, fontFamily: "'Playfair Display', serif" }}>Explore our programmes</h2>
-              <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '640px', margin: 0, lineHeight: 1.6 }}>{programmesData.length} NCHE-accredited programmes across all levels — from Certificates and Diplomas to Bachelors, Masters and Postgraduate Diplomas.</p>
+              <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '640px', margin: 0, lineHeight: 1.6 }}>{programmesData.length} NCHE-accredited programmes across all levels â€” from Certificates and Diplomas to Bachelors, Masters and Postgraduate Diplomas.</p>
             </div>
             <a onClick={(e) => { e.preventDefault(); navigate('/programmes'); }} href="/programmes" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#3d1a6b', fontWeight: 700, fontSize: '15px', textDecoration: 'none', padding: '12px 20px', borderRadius: '8px', border: '2px solid #3d1a6b', cursor: 'pointer', whiteSpace: 'nowrap' }}>Browse all {programmesData.length} <ArrowRight size={18} /></a>
           </div>
           <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '32px' }}>
-            {[{ label: 'Diploma', emoji: '📜' }, { label: 'Bachelor', emoji: '🎓' }, { label: 'Postgraduate Diploma', emoji: '📘' }, { label: 'Masters', emoji: '🎓' }, { label: 'Certificate', emoji: '🏅' }, { label: 'HEC', emoji: '📋' }].map(({ label, emoji }) => {
+            {[{ label: 'Diploma', emoji: '' }, { label: 'Bachelor', emoji: '' }, { label: 'Postgraduate Diploma', emoji: '' }, { label: 'Masters', emoji: '' }, { label: 'Certificate', emoji: '' }, { label: 'HEC', emoji: '' }].map(({ label, emoji }) => {
               const count = programmesData.filter((p) => p.level === label).length;
               if (count === 0) return null;
               return (
@@ -120,7 +120,7 @@ export function Home() {
                   onMouseEnter={(e) => { e.currentTarget.style.background = '#3d1a6b'; e.currentTarget.style.color = '#fff'; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = '#f0e8fa'; e.currentTarget.style.color = '#3d1a6b'; }}
                 >
-                  {emoji} {label} <span style={{ opacity: 0.7, marginLeft: '4px' }}>({count})</span>
+                  {label}
                 </button>
               );
             })}
@@ -157,7 +157,7 @@ export function Home() {
             <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '680px', margin: '0 auto', lineHeight: 1.7 }}>From the Chancellor's office to every faculty and department, AVIU is powered by {staffDirectory.length} dedicated professionals working together for our students.</p>
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '16px' }}>
-            <AnimatedStatCard target={staffDirectory.length} label="Total staff" sub="Academic · Admin · Support" delay={0} />
+            <AnimatedStatCard target={staffDirectory.length} label="Total staff" sub="Academic Â· Admin Â· Support" delay={0} />
             <AnimatedStatCard target={7} label="Departments" sub="Across every faculty" delay={150} />
             <AnimatedStatCard target={staffDirectory.filter(s => s.role.includes('Dean') && s.role !== 'Dean of Students').length} label="Deans & Directors" sub="Leading each faculty" delay={300} />
             <AnimatedStatCard target={staffDirectory.filter(s => s.role.startsWith('HOD') || s.role.includes('Head of')).length} label="Heads of Department" sub="Programme leadership" delay={450} />
