@@ -29,7 +29,7 @@ export function SubPageHero({
       <FloatingParticles count={12} orbs={false} />
       <div className="page-hero-inner">
         <nav className="breadcrumb">
-          {crumbs.map((crumb, i) => (
+          {crumbs.filter((crumb, i) => crumb.label !== 'Home' && i !== crumbs.length - 1).map((crumb, i, arr) => (
             <span key={crumb.path} className="breadcrumb-item">
               {i > 0 && <ChevronRight size={12} />}
               <a
