@@ -1,5 +1,8 @@
-import { loadAnalytics, trackPageview } from '@/lib/analytics';
-import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+import { loadAnalytics, trackPageview } from '@/lib/analytics';import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
+
+
+import Leadership from '@/pages/about/Leadership';
+import OfficeOfTheViceChancellor from '@/pages/about/OfficeOfTheViceChancellor';
 
 type RouterContextType = {
   path: string;
@@ -9,6 +12,8 @@ type RouterContextType = {
 const RouterContext = createContext<RouterContextType>({
   path: '/',
   navigate: () => {},
+        
+        
 });
 
 function normalise(p: string): string {

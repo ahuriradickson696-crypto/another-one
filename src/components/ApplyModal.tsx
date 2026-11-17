@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { ArrowRight, Mail, X, Check, AlertCircle, Loader2 } from 'lucide-react';
 import { faculties } from '@/data/university';
 
@@ -20,7 +20,17 @@ export function ApplyModal({
   onClose: () => void;
   programmeName?: string;
 }) {
-  const [form, setForm] = useState({ full_name: '', email: '', phone: '', programme: '', intake: '', message: '' });
+  const [form, setForm] = useState({
+    full_name: '',
+    email: '',
+    phone: '',
+    country: '',
+    faculty: '',
+    programme: '',
+    intake: '',
+    message: '',
+    consent: false,
+  });
   const [step, setStep] = useState<'form' | 'choose' | 'done'>('form');
   const [opening, setOpening] = useState(false);
   const [validationError, setValidationError] = useState('');

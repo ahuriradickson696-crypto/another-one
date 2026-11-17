@@ -1,7 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { RouterProvider, useRouter } from '@/router/Router';
 import { Header } from '@/components/Header';
-import { IntakePopup } from '@/components/IntakePopup';
 import { Footer } from '@/components/Footer';
 import { ApplyProvider } from '@/components/ApplyContext';
 import { FloatingApplyButton } from '@/components/FloatingApplyButton';
@@ -53,6 +52,9 @@ const SportsRecreation = lazy(() => import('@/pages/studentlife/SportsRecreation
 const CareerServices = lazy(() => import('@/pages/studentlife/CareerServices').then((m) => ({ default: m.CareerServices })));
 
 const Leadership = lazy(() => import('@/pages/about/Leadership').then((m) => ({ default: m.Leadership })));
+const BoardOfDirectors = lazy(() => import('@/pages/about/BoardOfDirectors').then((m) => ({ default: m.BoardOfDirectors })));
+const UniversityCouncil = lazy(() => import('@/pages/about/UniversityCouncil').then((m) => ({ default: m.UniversityCouncil })));
+const OfficeOfTheViceChancellor = lazy(() => import('@/pages/about/OfficeOfTheViceChancellor').then((m) => ({ default: m.OfficeOfTheViceChancellor })));
 const Campus = lazy(() => import('@/pages/about/Campus').then((m) => ({ default: m.Campus })));
 const Alumni = lazy(() => import('@/pages/about/Alumni').then((m) => ({ default: m.Alumni })));
 const Careers = lazy(() => import('@/pages/about/Careers').then((m) => ({ default: m.Careers })));
@@ -354,8 +356,7 @@ function App() {
         <FloatingVideoBox />
         
         <Routes />
-  <IntakePopup />
-      </ApplyProvider>
+</ApplyProvider>
     </RouterProvider>
   );
 }
