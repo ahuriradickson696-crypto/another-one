@@ -1,0 +1,36 @@
+﻿node_modules/
+dist/
+*.bak_*
+*.bak-*
+_backups/
+.vite/
+*.log
+.DS_Store
+.env
+.env.local
+
+# Dev scripts (not part of the site)
+*.ps1
+rebuild-home.ps1
+group-by-level.ps1
+reorganize-programmes.ps1
+make-badges-clickable.ps1
+animate-staff-stats.ps1
+clickable-stats.ps1
+add-interstitial.ps1
+fix-home-programmes.ps1
+fix-all.ps1
+fix-interstitial-dupe.ps1
+
+# Backup files
+*.bak_*
+*.bak-*
+_backups/
+_backup_*
+
+# Build
+dist/
+
+# Logs
+*.log
+npm-debug.log*
