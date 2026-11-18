@@ -1,0 +1,82 @@
+﻿import { faculties, newsItems, events, navGroups } from '@/data/university';
+
+export type SearchEntry = { title: string; section: string; path: string; keywords: string };
+
+const synonyms: Record<string, string> = {
+  '/fees': 'tuition cost costs payment pay price bursar money',
+  '/admissions/how-to-apply': 'apply application register registration join enrol enroll',
+  '/admissions': 'admission intake join apply',
+  '/study': 'programmes programs courses degrees study faculties',
+  '/research': 'research phd publications journals conferences centres',
+  '/library': 'library books e-library journals resources',
+  '/student-life': 'student life accommodation sports guild wellbeing',
+  '/about': 'about history leadership governance mission vision',
+  '/news': 'news updates announcements',
+  '/events': 'events calendar ceremonies conferences',
+  '/contact': 'contact phone email address location',
+  '/staff': 'staff directory leadership management academic',
+};
+
+function normalize(s: string): string {
+  return s
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/programs?\b|programmes\b/g, 'programme')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+const entries: SearchEntry[] = [];
+const seen = new Set<string>();
+
+const add = (title: string, section: string, path: string, keywords = '') => {
+  const key = `${path}|${title}`;
+  if (seen.has(key)) return;
+  seen.add(key);
+  entries.push({ title, section, path, keywords: normalize(`${title} ${section} ${keywords}`) });
+};
+
+add('Home', 'AVIU', '/', 'avance international university welcome');
+
+for (const g of navGroups) {
+  for (const i of g.items) {
+    add(i.label, g.label, i.path, synonyms[i.path] ?? '');
+  }
+}
+
+for (const n of newsItems) {
+  add(n.title, `News · ${n.date}`, `/news/${n.id}`, `${n.category} ${n.excerpt}`);
+}
+
+for (const f of faculties) {
+  add(f.name, 'Faculty', '/study', `${f.shortName} ${f.description}`);
+  for (const p of f.programs) {
+    add(p.name, f.shortName, '/study', `${p.level} ${p.duration} ${p.description ?? ''}`);
+  }
+}
+
+for (const e of events) {
+  add(e.title, 'Event', '/events', `${e.date} ${e.time} ${e.location} ${e.description}`);
+}
+
+export function searchSite(query: string): SearchEntry[] {
+  const q = normalize(query);
+  if (!q) return [];
+  const terms = q.split(' ').filter(Boolean);
+  return entries
+    .map((e) => {
+      let score = 0;
+      for (const t of terms) {
+        if (e.title.toLowerCase().includes(t)) score += 10;
+        if (e.keywords.includes(t)) score += 3;
+      }
+      return { entry: e, score };
+    })
+    .filter((x) => x.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 20)
+    .map((x) => x.entry);
+}
+
+export const searchEntries = entries;

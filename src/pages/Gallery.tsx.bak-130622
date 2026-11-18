@@ -1,0 +1,269 @@
+﻿import { useEffect, useMemo, useState } from 'react';
+import { X } from 'lucide-react';
+import { PageHero } from '@/components/PageHero';
+import { pageImages, allGallery } from '@/data/pageImages';
+import {
+  installationImages,
+  serviceImages,
+  galleryImages,
+  imageDimensions,
+  type GalleryImage,
+} from '@/data/galleryImages.generated';
+import { useImageGalleryJsonLd, type SeoImage } from '@/lib/imageSeo';
+
+const labels: Record<string, string> = {
+  'strategic-partnership-launch.jpg': 'Strategic partnership launch, 5th Graduation',
+  'graduate-celebrating.jpg': 'Graduate celebrating',
+  'graduates-seated.jpg': 'Graduands seated at the ceremony',
+  'graduation-parents-guests.jpg': 'Parents and guests at graduation',
+  'graduation-dignitaries.jpg': 'Academic dignitaries in regalia',
+  'graduate-class-2026.jpg': 'Class of 2026 graduate',
+  'cam-launch-stage.jpg': 'Launch of Complementary and Alternative Medicine',
+  'cam-launch-ribbon.jpg': 'Complementary and Alternative Medicine launch, ribbon cutting',
+  'campus-aviu-event-1.jpg': 'Campus event',
+  'award-ceremony.jpg': 'Award ceremony',
+  'board-meeting.jpg': 'Board meeting',
+  'classroom-anatomy.jpg': 'Anatomy classroom',
+  'classroom-discussion.jpg': 'Classroom discussion',
+  'conference-audience.jpg': 'Conference',
+  'graduand-portrait.jpg': 'Graduand',
+  'graduates-laughing.jpg': 'Graduation celebrations',
+  'graduation-ceremony.jpg': 'Graduation ceremony',
+  'graduation-crowd.jpg': 'Graduation crowd',
+  'guest-lecture.jpg': 'Guest lecture',
+  'lab-equipment-visit.jpg': 'Lab equipment visit',
+  'lab-herbal.jpg': 'Herbal medicine lab',
+  'lab-microscope.jpg': 'Microscope lab',
+  'lab-pharmacy.jpg': 'Pharmacy lab',
+  'medical-facility-tour.jpg': 'Medical facility tour',
+  'mou-signing.jpg': 'MoU signing',
+  'partnership-bathspa.jpg': 'Partnership event',
+  'poetry-presentation.jpg': 'Poetry presentation',
+  'senate-meeting.jpg': 'Senate meeting',
+  'staff-booth.jpg': 'Staff booth',
+};
+
+function getLabel(src: string) {
+  const name = src.split('/').pop() || '';
+  return labels[name] || name.replace(/\.[^.]+$/, ').replace(/-/g, ' ');
+}
+
+type LightboxItem = { src: string; alt: string; srcSet?: string; width?: number; height?: number };
+
+/** Photos from earlier shoots: plain files, labelled above. The optimised event photos come from the catalog. */
+const legacyPhotos = allGallery.filter((s) => !s.startsWith('/images/gallery/'));
+
+function CatalogGrid({ items, onOpen }: { items: GalleryImage[]; onOpen: (i: LightboxItem) => void }) {
+  return (
+    <div className="gallery-grid">
+      {items.map((g) => (
+        <figure key={g.id} style={{ margin: 0 }}>
+          <button
+            type="button"
+            className="gallery-item"
+            style={{ width: '100%' }}
+            onClick={() => onOpen({ src: g.src, srcSet: g.srcSet, alt: g.alt, width: g.width, height: g.height })}
+            aria-label={`View larger: ${g.caption}`}
+          >
+            <img
+              src={g.mdSrc}
+              srcSet={g.srcSet}
+              sizes="(max-width: 700px) 50vw, 340px"
+              width={g.mdWidth}
+              height={g.mdHeight}
+              alt={g.alt}
+              title={g.title}
+              loading="lazy"
+              decoding="async"
+              style={g.height > g.width ? { objectPosition: 'center 22%' } : undefined}
+            />
+            <span className="gallery-caption">{g.caption}</span>
+          </button>
+        </figure>
+      ))}
+    </div>
+  );
+}
+
+export function Gallery() {
+  const [lightbox, setLightbox] = useState<LightboxItem | null>(null);
+
+  useEffect(() => {
+    if (!lightbox) return;
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setLightbox(null);
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [lightbox]);
+
+  const seoImages = useMemo<SeoImage[]>(
+    () => [
+      ...galleryImages.map((g) => ({
+        url: g.src,
+        thumb: g.smSrc,
+        name: g.title,
+        caption: g.caption,
+        description: g.description,
+        width: g.width,
+        height: g.height,
+        keywords: g.keywords,
+      })),
+      ...legacyPhotos.map((src) => {
+        const [width, height] = imageDimensions[src] ?? [undefined, undefined];
+        const label = getLabel(src);
+        return {
+          url: src,
+          name: `${label} | Avance International University`,
+          caption: label,
+          description: `${label} at Avance International University (AVIU), Nabweru, Uganda.`,
+          width,
+          height,
+          keywords: ['Avance International University', 'AVIU', 'Uganda'],
+        };
+      }),
+    ],
+    []
+  );
+
+  useImageGalleryJsonLd({
+    id: 'aviu-photo-gallery',
+    name: 'Photo gallery | Avance International University (AVIU)',
+    path: '/gallery',
+    description:
+      'Photos from Avance International University in Nabweru, Uganda: the installation of the 2nd Chancellor, services, graduations, classrooms, laboratories and campus life.',
+    images: seoImages,
+  });
+
+  return (
+    <div className="page-content">
+      <PageHero
+        images={pageImages.gallery.slice(0, 6)}
+        eyebrow="Campus gallery"
+        title={<>Life at <em>AVIU</em></>}
+        subtitle="Explore our campus, classrooms, labs, graduations, and student life through photos from Avance International University."
+      />
+
+      <section className="section-pad">
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span className="eyebrow-line" /> Campus videos
+            </div>
+            <h2>
+              Watch life at <em>AVIU.</em>
+            </h2>
+          </div>
+        </div>
+        <div className="gallery-grid" style={{ gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))' }}>
+          {[
+            { id: 'XPQdBYI9vcU', title: 'Campus highlights' },
+            { id: 'qqWsn74VlT0', title: 'Student life' },
+            { id: 'cQWuuKjoh44', title: 'Academic excellence' },
+            { id: 'aTqd3eX377U', title: 'Campus tour' },
+            { id: 'gOdpEUC96vY', title: 'Graduation moments' },
+            { id: '7bcnZQhDfzM', title: 'AVIU community' },
+            { id: '-Z3M-jtCSDU', title: 'Research & innovation' },
+            { id: 'AS6sHqFZek4', title: 'Student voices' },
+          ].map((v) => (
+            <div key={v.id} className="gallery-item" style={{ paddingBottom: 0, aspectRatio: '16/9' }}>
+              <iframe
+                src={`https://www.youtube.com/embed/${v.id}?rel=0&modestbranding=1`}
+                title={v.title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                loading="lazy"
+                style={{ width: '100%', height: '100%', border: 0, borderRadius: 8 }}
+              />
+              <span className="gallery-caption">{v.title}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-pad">
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span className="eyebrow-line" /> Installation of the 2nd Chancellor
+            </div>
+            <h2>
+              A new Chancellor, <em>installed.</em>
+            </h2>
+            <p className="body-text" style={{ maxWidth: 760, marginTop: 12 }}>
+              Photographs from the installation of the Rt. Rev. James William Ssebagala as the 2nd Chancellor of Avance
+              International University: the ceremonial mace, academic regalia, group portraits and the cake cutting.
+            </p>
+          </div>
+        </div>
+        <CatalogGrid items={installationImages} onOpen={setLightbox} />
+      </section>
+
+      <section className="section-pad section-alt">
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span className="eyebrow-line" /> Service and congregation
+            </div>
+            <h2>
+              Faith, music and <em>community.</em>
+            </h2>
+            <p className="body-text" style={{ maxWidth: 760, marginTop: 12 }}>
+              Clergy, choir, students and guests gathered together in the hall at Avance International University.
+            </p>
+          </div>
+        </div>
+        <CatalogGrid items={serviceImages} onOpen={setLightbox} />
+      </section>
+
+      <section className="section-pad">
+        <div className="section-heading">
+          <div>
+            <div className="eyebrow">
+              <span className="eyebrow-line" /> Photo gallery
+            </div>
+            <h2>
+              Moments from <em>Nabweru campus.</em>
+            </h2>
+          </div>
+        </div>
+        <div className="gallery-grid">
+          {legacyPhotos.map((src) => {
+            const [w, h] = imageDimensions[src] ?? [undefined, undefined];
+            const label = getLabel(src);
+            const alt = `${label} at Avance International University (AVIU), Uganda`;
+            return (
+              <button
+                key={src}
+                type="button"
+                className="gallery-item"
+                onClick={() => setLightbox({ src, alt, width: w, height: h })}
+                aria-label={`View larger: ${label}`}
+              >
+                <img src={src} width={w} height={h} alt={alt} title={label} loading="lazy" decoding="async" />
+                <span className="gallery-caption">{label}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {lightbox && (
+        <div className="gallery-lightbox" onClick={() => setLightbox(null)} role="dialog" aria-modal="true" aria-label={lightbox.alt}>
+          <button type="button" className="gallery-lightbox-close" onClick={() => setLightbox(null)} aria-label="Close">
+            <X size={24} />
+          </button>
+          <img
+            src={lightbox.src}
+            srcSet={lightbox.srcSet}
+            sizes="(max-width: 1100px) 96vw, 1100px"
+            width={lightbox.width}
+            height={lightbox.height}
+            alt={lightbox.alt}
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
+    </div>
+  );
+}
+
+

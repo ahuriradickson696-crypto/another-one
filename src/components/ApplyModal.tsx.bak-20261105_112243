@@ -1,0 +1,247 @@
+import { useState, useEffect } from 'react';
+import { ArrowRight, Check, X, Loader2, AlertCircle } from 'lucide-react';
+import { faculties } from '@/data/university';
+
+const intakes = [
+  { name: 'January Intake', period: 'January – April', applications: 'October – December', status: 'Open' },
+  { name: 'May Intake', period: 'May – August', applications: 'February – April', status: 'Open' },
+  { name: 'August Intake', period: 'August – December', applications: 'May – July', status: 'Open Now' },
+];
+
+export function ApplyModal({
+  open,
+  onClose,
+  programmeName,
+}: {
+  open: boolean;
+  onClose: () => void;
+  programmeName?: string;
+}) {
+  const [form, setForm] = useState({
+    full_name: '',
+    email: '',
+    phone: '',
+    faculty: '',
+    programme: '',
+    intake: '',
+    message: '',
+  });
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [errorMsg, setErrorMsg] = useState('');
+
+  // Auto-fill the programme when modal opens with a programmeName
+  useEffect(() => {
+    if (open && programmeName) {
+      setForm((f) => ({ ...f, programme: programmeName }));
+    }
+  }, [open, programmeName]);
+
+  if (!open) return null;
+
+  const update = (field: string, value: string) => {
+    setForm((f) => ({ ...f, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('submitting');
+    setErrorMsg('');
+
+    try {
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const apiUrl = supabaseUrl
+        ? `${supabaseUrl}/functions/v1/submit-application`
+        : '';
+      if (apiUrl) {
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${import.meta.env.VITE_SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify(form),
+        });
+        if (!response.ok) {
+          throw new Error('Submission failed. Please email info@aviu.ac.ug or call Admissions.');
+        }
+      }
+      setStatus('success');
+    } catch (err) {
+      setStatus('error');
+      setErrorMsg(err instanceof Error ? err.message : 'An error occurred.');
+    }
+  };
+
+  const overlayStyle: React.CSSProperties = {
+    position: 'fixed',
+    inset: 0,
+    background: 'rgba(0,0,0,0.55)',
+    zIndex: 9999,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '20px',
+    overflowY: 'auto',
+  };
+
+  const modalStyle: React.CSSProperties = {
+    background: '#fff',
+    borderRadius: '16px',
+    maxWidth: '560px',
+    width: '100%',
+    padding: '32px',
+    boxShadow: '0 20px 60px rgba(0,0,0,0.25)',
+    maxHeight: '90vh',
+    overflowY: 'auto',
+    position: 'relative',
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%',
+    padding: '12px 14px',
+    borderRadius: '8px',
+    border: '1px solid #e0d4ee',
+    fontSize: '14px',
+    outline: 'none',
+    fontFamily: 'inherit',
+  };
+
+  const labelStyle: React.CSSProperties = {
+    display: 'block',
+    fontSize: '12px',
+    fontWeight: 600,
+    color: '#3d1a6b',
+    marginBottom: '6px',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px',
+  };
+
+  return (
+    <div style={overlayStyle} onClick={onClose}>
+      <div style={modalStyle} onClick={(e) => e.stopPropagation()}>
+        <button
+          onClick={onClose}
+          style={{ position: 'absolute', top: 16, right: 16, background: 'none', border: 'none', cursor: 'pointer', color: '#8a7fa0' }}
+          aria-label="Close"
+        >
+          <X size={22} />
+        </button>
+
+        {status === 'success' ? (
+          <div style={{ textAlign: 'center', padding: '20px 0' }}>
+            <div style={{ width: 64, height: 64, background: '#dcfce7', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 20px' }}>
+              <Check size={32} color="#16a34a" />
+            </div>
+            <h2 style={{ fontSize: '24px', color: '#2d1454', margin: '0 0 12px' }}>Application Received</h2>
+            <p style={{ color: '#5a4b6b', fontSize: '15px', lineHeight: 1.6, marginBottom: '24px' }}>
+              Thank you, {form.full_name || 'Applicant'}. Our admissions team will contact you within 2 business days.
+            </p>
+            <button onClick={onClose} style={{ background: '#3d1a6b', color: '#fff', padding: '12px 28px', borderRadius: '8px', border: 'none', fontSize: '14px', fontWeight: 600, cursor: 'pointer' }}>
+              Close
+            </button>
+          </div>
+        ) : (
+          <>
+            <h2 style={{ fontSize: '24px', color: '#2d1454', margin: '0 0 6px', paddingRight: '30px' }}>
+              Apply to AVIU
+            </h2>
+            <p style={{ color: '#8a7fa0', fontSize: '14px', margin: '0 0 24px' }}>
+              Fill in your details. Our team will get back to you shortly.
+            </p>
+
+            {programmeName && (
+              <div style={{ background: '#f0e8fa', padding: '12px 16px', borderRadius: '8px', marginBottom: '20px', fontSize: '14px', color: '#3d1a6b' }}>
+                <strong>Selected Programme:</strong> {programmeName}
+              </div>
+            )}
+
+            {status === 'error' && (
+              <div style={{ background: '#fee2e2', padding: '12px 16px', borderRadius: '8px', marginBottom: '20px', fontSize: '14px', color: '#991b1b', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <AlertCircle size={18} />
+                {errorMsg}
+              </div>
+            )}
+
+            <form onSubmit={handleSubmit}>
+              <div style={{ display: 'grid', gap: '16px' }}>
+                <div>
+                  <label style={labelStyle}>Full Name *</label>
+                  <input type="text" required value={form.full_name} onChange={(e) => update('full_name', e.target.value)} style={inputStyle} placeholder="Your full name" />
+                </div>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
+                  <div>
+                    <label style={labelStyle}>Email *</label>
+                    <input type="email" required value={form.email} onChange={(e) => update('email', e.target.value)} style={inputStyle} placeholder="you@email.com" />
+                  </div>
+                  <div>
+                    <label style={labelStyle}>Phone *</label>
+                    <input type="tel" required value={form.phone} onChange={(e) => update('phone', e.target.value)} style={inputStyle} placeholder="+256..." />
+                  </div>
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Faculty</label>
+                  <select value={form.faculty} onChange={(e) => update('faculty', e.target.value)} style={inputStyle}>
+                    <option value="">Select a faculty</option>
+                    {faculties.map((f) => (
+                      <option key={f.name} value={f.name}>{f.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Programme *</label>
+                  <input
+                    type="text"
+                    required
+                    value={form.programme}
+                    onChange={(e) => update('programme', e.target.value)}
+                    style={{ ...inputStyle, background: programmeName ? '#f0e8fa' : '#fff', fontWeight: programmeName ? 600 : 400 }}
+                    placeholder="Select from catalogue or type here"
+                    readOnly={!!programmeName}
+                  />
+                  {programmeName && (
+                    <p style={{ fontSize: '11px', color: '#8a7fa0', margin: '4px 0 0' }}>
+                      Locked to your selected programme. Close and choose a different one to change.
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Preferred Intake *</label>
+                  <select required value={form.intake} onChange={(e) => update('intake', e.target.value)} style={inputStyle}>
+                    <option value="">Select intake</option>
+                    {intakes.map((i) => (
+                      <option key={i.name} value={i.name}>{i.name} — Applications: {i.applications} ({i.status})</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Message (optional)</label>
+                  <textarea
+                    value={form.message}
+                    onChange={(e) => update('message', e.target.value)}
+                    rows={3}
+                    style={{ ...inputStyle, resize: 'vertical' }}
+                    placeholder="Any questions or additional information..."
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === 'submitting'}
+                  style={{ background: '#3d1a6b', color: '#fff', padding: '14px 24px', borderRadius: '8px', border: 'none', fontSize: '15px', fontWeight: 600, cursor: status === 'submitting' ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', opacity: status === 'submitting' ? 0.7 : 1 }}
+                >
+                  {status === 'submitting' ? <><Loader2 size={18} style={{ animation: 'spin 1s linear infinite' }} /> Submitting...</> : <>Submit Application <ArrowRight size={18} /></>}
+                </button>
+              </div>
+            </form>
+          </>
+        )}
+      </div>
+      <style>{`@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }`}</style>
+    </div>
+  );
+}

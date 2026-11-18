@@ -1,0 +1,144 @@
+﻿import { SubPageHero } from '@/components/SubPageHero';
+import { pageImages } from '@/data/pageImages';
+
+const governance = [
+  {
+    level: 'Level 1 — Ownership',
+    title: 'General Meeting of Founders',
+    detail: 'Founding members of the university company. Appoints the Board of Directors and approves major constitutional matters.',
+    icon: '🏛️',
+    color: '#2d1454',
+  },
+  {
+    level: 'Level 2 — Fiduciary',
+    title: 'Board of Directors',
+    detail: 'Fiduciary and strategic oversight. Approves budgets, major investments, senior appointments, and institutional strategy.',
+    icon: '📊',
+    color: '#3d1a6b',
+  },
+  {
+    level: 'Level 3 — Ceremonial',
+    title: 'Chancellor',
+    detail: 'Ceremonial head of the university. Confers degrees at congregation and represents AVIU at official state and diplomatic functions.',
+    icon: '🎓',
+    color: '#4c1d95',
+  },
+  {
+    level: 'Level 4 — Policy',
+    title: 'University Council',
+    detail: 'Supreme policy-making body. Approves academic programmes, budgets, senior appointments and ensures compliance with NCHE standards.',
+    icon: '⚖️',
+    color: '#5b21b6',
+  },
+  {
+    level: 'Level 5 — Executive',
+    title: 'Vice Chancellor',
+    detail: 'Chief executive and academic officer. Reports to Council and provides strategic leadership across all university operations.',
+    icon: '👔',
+    color: '#6d28d9',
+  },
+  {
+    level: 'Level 6 — Academic',
+    title: 'Senate',
+    detail: 'Supreme academic authority. Approves curricula, examination results, research policy and admission standards.',
+    icon: '📚',
+    color: '#7c3aed',
+  },
+  {
+    level: 'Level 7 — Management',
+    title: 'Management Committee',
+    detail: 'Senior administrative officers: DVC, University Secretary, Academic Registrar, Bursar, Quality Assurance Director, Deans.',
+    icon: '🎯',
+    color: '#8b5cf6',
+  },
+  {
+    level: 'Level 8 — Faculties',
+    title: 'Faculty Deans & Academic Boards',
+    detail: 'Each faculty is led by a Dean and Faculty Board, responsible for programme quality, research, and student academic affairs.',
+    icon: '🏫',
+    color: '#a78bfa',
+  },
+];
+
+export function OrgChart() {
+  return (
+    <div style={{ background: '#f9f6fd', minHeight: '100vh', paddingBottom: '60px' }}>
+      <SubPageHero
+        images={pageImages.about}
+        eyebrow="Governance"
+        title={<>University <em>Organisation</em></>}
+        subtitle="AVIU's governance structure aligns with the Universities and Other Tertiary Institutions Act and NCHE requirements."
+        crumbs={[
+          { label: 'Home', path: '/' },
+          { label: 'About', path: '/about' },
+          { label: 'Organisation', path: '/about/organisation' },
+        ]}
+      />
+
+      <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '60px 20px' }}>
+
+        <div style={{ textAlign: 'center', marginBottom: '50px' }}>
+          <h2 style={{ fontSize: '32px', color: '#2d1454', margin: '0 0 12px', fontFamily: "'Playfair Display', serif" }}>
+            NCHE-Compliant Governance Structure
+          </h2>
+          <p style={{ color: '#5a4b6b', fontSize: '16px', maxWidth: '700px', margin: '0 auto', lineHeight: 1.6 }}>
+            From ownership to faculty level, every layer of AVIU's governance is designed for accountability, academic excellence and compliance with national standards.
+          </p>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          {governance.map((g, i) => (
+            <div
+              key={i}
+              style={{
+                background: '#fff',
+                borderRadius: '16px',
+                padding: '28px',
+                border: '1px solid #e0d4ee',
+                display: 'flex',
+                gap: '24px',
+                alignItems: 'flex-start',
+                boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
+              }}
+            >
+              <div
+                style={{
+                  width: '72px',
+                  height: '72px',
+                  borderRadius: '16px',
+                  background: g.color,
+                  color: '#fff',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '32px',
+                  flexShrink: 0,
+                }}
+              >
+                {g.icon}
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ color: g.color, fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1px', margin: '0 0 6px' }}>
+                  {g.level}
+                </p>
+                <h3 style={{ fontSize: '22px', color: '#2d1454', margin: '0 0 10px', fontWeight: 700 }}>
+                  {g.title}
+                </h3>
+                <p style={{ color: '#5a4b6b', fontSize: '15px', margin: 0, lineHeight: 1.6 }}>
+                  {g.detail}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ background: '#fff', borderRadius: '16px', padding: '32px', marginTop: '40px', border: '1px solid #e0d4ee', textAlign: 'center' }}>
+          <h3 style={{ fontSize: '20px', color: '#2d1454', margin: '0 0 12px' }}>NCHE Compliance</h3>
+          <p style={{ color: '#5a4b6b', fontSize: '15px', maxWidth: '800px', margin: '0 auto', lineHeight: 1.6 }}>
+            This governance structure complies with the National Council for Higher Education (NCHE) Standards, including statutory positions (Chancellor, Council, Senate, Vice Chancellor) and academic quality frameworks.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
